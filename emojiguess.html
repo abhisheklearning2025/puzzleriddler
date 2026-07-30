@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guessemojiddle — Emoji riddles for rooms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0b16; --bg2:#171226; --card:#1e1830; --card2:#251d3a; --line:#332a4d;
+  --text:#efeaf7; --muted:#a297bd; --gold:#ffc857; --mint:#4ade9b; --rose:#ff6b8b; --violet:#a97bff;
+  --onGold:#221803;
+  --shadow:0 18px 45px -18px rgba(0,0,0,.85);
+  --emoji:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif;
+}
+html[data-theme="light"]{
+  --bg:#fdfbf7; --bg2:#f4f0e8; --card:#ffffff; --card2:#f7f3ec; --line:#ddd4c4;
+  --text:#1a1526; --muted:#6b6280; --gold:#b8791a; --mint:#118a5a; --rose:#c62a52; --violet:#6b3fd4;
+  --onGold:#fff;
+  --shadow:0 14px 34px -18px rgba(40,30,10,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; display:flex; justify-content:center;
+  padding:26px 18px 50px; transition:background .25s ease,color .25s ease;
+}
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(1100px 600px at 12% -8%, rgba(169,123,255,.20), transparent 60%),
+    radial-gradient(900px 520px at 92% 4%, rgba(255,200,87,.14), transparent 62%), var(--bg);
+}
+.app{width:100%;max-width:820px}
+body.presenting{padding:0;align-items:stretch}
+body.presenting .app{max-width:none}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.brand .mark{font-family:var(--emoji);font-size:29px;line-height:1}
+.brand h1{font-family:"Fraunces",Georgia,serif;font-weight:800;font-size:26px;letter-spacing:-.02em}
+.brand h1 em{font-style:normal;color:var(--gold)}
+.tagline{color:var(--muted);font-size:12.5px;margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:9px}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.pill b{color:var(--text);font-weight:700}
+.iconbtn{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:999px;
+  width:36px;height:36px;font-size:15px;display:grid;place-items:center;transition:.15s}
+.iconbtn:hover{border-color:var(--gold)}
+
+.screen{display:none;animation:rise .3s ease}
+.screen.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+.btn{border-radius:13px;padding:13px 20px;font-size:15px;font-weight:700;background:var(--gold);color:var(--onGold);
+  transition:transform .12s ease,filter .15s ease}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:var(--card);color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--card2)}
+.btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+.sec-title{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 12px 3px}
+
+/* ---------- home ---------- */
+.hero{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);
+  border-radius:22px;padding:26px 24px;margin-bottom:22px;box-shadow:var(--shadow)}
+.hero h2{font-family:"Fraunces",Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.hero p{color:var(--muted);font-size:14.5px;line-height:1.62;max-width:62ch}
+.demo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:17px;padding-top:17px;border-top:1px dashed var(--line)}
+.demo .e{font-family:var(--emoji);font-size:30px;letter-spacing:6px}
+.demo .arrow{color:var(--muted)}
+.demo .ans{font-family:"Fraunces",serif;font-size:20px;color:var(--gold)}
+.demo small{color:var(--muted);font-size:12.5px;display:block;width:100%}
+
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px;margin-bottom:26px}
+.mode{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;
+  transition:transform .15s ease,border-color .15s ease}
+.mode:hover{transform:translateY(-3px);border-color:var(--gold)}
+.mode.primary{background:linear-gradient(140deg,rgba(255,200,87,.17),rgba(169,123,255,.15));border-color:var(--gold)}
+.mode .ic{font-family:var(--emoji);font-size:27px;display:block;margin-bottom:10px}
+.mode .nm{font-weight:700;font-size:17px;margin-bottom:5px}
+.mode .ct{color:var(--muted);font-size:13px;line-height:1.5}
+.mode .tag{display:inline-block;margin-top:10px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--gold);color:var(--onGold);border-radius:6px;padding:3px 7px;font-weight:700}
+
+/* ---------- setup ---------- */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow)}
+.panel h3{font-family:"Fraunces",serif;font-size:19px;margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:13px;margin-bottom:16px;line-height:1.55}
+.teamrow{display:flex;gap:9px;align-items:center;margin-bottom:9px}
+.teamrow .dot{width:13px;height:13px;border-radius:50%;flex:0 0 auto}
+.teamrow input{flex:1;background:var(--bg);border:1.5px solid var(--line);border-radius:11px;color:var(--text);
+  padding:11px 13px;font-size:15px;font-family:inherit;outline:none}
+.teamrow input:focus{border-color:var(--gold)}
+.teamrow .rm{background:transparent;border:1px solid var(--line);border-radius:9px;width:34px;height:34px;color:var(--muted);font-size:16px}
+.teamrow .rm:hover{color:var(--rose);border-color:var(--rose)}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:9px 14px;font-size:13.5px;
+  color:var(--muted);font-weight:500;transition:.14s}
+.opt:hover{color:var(--text)}
+.opt.sel{border-color:var(--gold);background:var(--gold);color:var(--onGold);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+/* ---------- host stage ---------- */
+.stagewrap{min-height:100vh;display:flex;flex-direction:column;padding:20px 22px 16px}
+.topline{display:flex;align-items:center;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.topline .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+  font-size:13px;font-weight:600;letter-spacing:.03em}
+.diffdots{display:flex;gap:4px;align-items:center}
+.diffdots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
+.diffdots i.on{background:var(--gold)}
+.topline .spacer{flex:1}
+.timerbar{height:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:10px 0 0}
+.timerbar .t{height:100%;width:100%;background:linear-gradient(90deg,var(--mint),var(--gold));transition:width 1s linear}
+.timerbar.up .t{background:var(--rose)}
+
+.bigstage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 0}
+.bigemoji{font-family:var(--emoji);font-size:clamp(64px,16vw,168px);line-height:1.2;letter-spacing:.14em;
+  word-break:break-word;max-width:100%}
+.bigemoji img{height:1em;width:1em;vertical-align:-.12em;margin:0 .06em}
+.reveal{margin-top:26px;min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px}
+.hidden-answer{color:var(--muted);font-size:clamp(15px,2vw,19px);letter-spacing:.4em;font-weight:500}
+.answer-big{font-family:"Fraunces",serif;font-size:clamp(30px,6vw,62px);color:var(--gold);animation:pop .4s ease}
+.answer-note{color:var(--muted);font-size:clamp(13px,1.6vw,17px);max-width:60ch;line-height:1.5}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+
+.teams{display:grid;gap:10px;margin-top:8px}
+.team{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:13px 12px;text-align:center;
+  transition:transform .12s ease,border-color .14s ease,background .14s ease}
+.team:hover{transform:translateY(-3px)}
+.team .nm{font-weight:700;font-size:clamp(14px,1.7vw,18px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.team .sc{font-family:"Fraunces",serif;font-size:clamp(22px,3vw,34px);margin-top:2px}
+.team .key{font-size:10.5px;color:var(--muted);letter-spacing:.09em;margin-top:3px}
+.team.won{animation:flash .6s ease}
+@keyframes flash{0%,100%{transform:none}30%{transform:scale(1.07)}}
+.hostbar{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px;align-items:center}
+.hostbar .hint{color:var(--muted);font-size:11.5px;width:100%;text-align:center;margin-top:6px;letter-spacing:.02em}
+kbd{background:var(--card);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;
+  padding:1px 6px;font-family:inherit;font-size:11px;color:var(--text)}
+
+/* ---------- results ---------- */
+.result{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:24px;
+  padding:32px 26px;text-align:center;box-shadow:var(--shadow)}
+.result .medal{font-family:var(--emoji);font-size:54px}
+.result h2{font-family:"Fraunces",serif;font-size:31px;margin:10px 0 4px}
+.result .sub{color:var(--muted);font-size:14px}
+.standings{margin-top:24px;text-align:left}
+.srow{display:flex;align-items:center;gap:13px;background:var(--bg);border:1px solid var(--line);
+  border-radius:14px;padding:14px 16px;margin-bottom:9px}
+.srow.first{border-color:var(--gold);background:linear-gradient(90deg,rgba(255,200,87,.14),transparent)}
+.srow .rank{font-family:"Fraunces",serif;font-size:21px;color:var(--muted);width:34px}
+.srow.first .rank{color:var(--gold)}
+.srow .nm{flex:1;font-weight:700;font-size:16px}
+.srow .sc{font-family:"Fraunces",serif;font-size:23px;color:var(--gold)}
+.srow .won{color:var(--muted);font-size:12px;margin-left:8px}
+.actions{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+
+/* ---------- solo ---------- */
+.solostage{background:linear-gradient(165deg,var(--card),var(--bg2));border:1px solid var(--line);
+  border-radius:24px;padding:28px 22px 24px;text-align:center;box-shadow:var(--shadow)}
+.puzzle{font-family:var(--emoji);font-size:clamp(40px,10vw,64px);line-height:1.25;margin:20px 0 6px;letter-spacing:.14em}
+.puzzle img{height:1em;width:1em;vertical-align:-.12em;margin:0 .06em}
+.blanks{letter-spacing:.34em;color:var(--gold);font-size:17px;font-weight:500;margin:10px 0 4px;line-height:1.9;word-break:break-word}
+.clue{color:var(--muted);font-size:13.5px;min-height:20px;margin-top:8px;font-style:italic}
+.answer{display:flex;gap:10px;margin-top:20px}
+.answer input{flex:1;background:var(--bg);border:1.5px solid var(--line);border-radius:13px;color:var(--text);
+  padding:14px 16px;font-size:16px;font-family:inherit;outline:none}
+.answer input:focus{border-color:var(--gold)}
+.tools{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+.tool{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:11px;padding:9px 14px;font-size:12.5px}
+.tool:hover:not(:disabled){color:var(--text);border-color:var(--violet)}
+.tool:disabled{opacity:.35;cursor:not-allowed}
+.verdict{margin-top:16px;border-radius:14px;padding:14px 16px;font-size:14.5px;display:none;text-align:left;line-height:1.55}
+.verdict.on{display:block}
+.verdict.good{background:rgba(74,222,155,.13);border:1px solid rgba(74,222,155,.45)}
+.verdict.bad{background:rgba(255,107,139,.11);border:1px solid rgba(255,107,139,.42)}
+.verdict.warm{background:rgba(255,200,87,.12);border:1px solid rgba(255,200,87,.42)}
+.scorebar{display:flex;justify-content:center;gap:9px;margin-top:15px;flex-wrap:wrap}
+.bar{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+.track{flex:1;height:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--violet));transition:width .35s ease}
+.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:none}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+footer{text-align:center;color:var(--muted);opacity:.75;font-size:12px;margin-top:32px;line-height:1.7}
+
+/* ---------- pack importer ---------- */
+textarea.paste{width:100%;min-height:190px;background:var(--bg);border:1.5px solid var(--line);border-radius:13px;
+  color:var(--text);padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;
+  outline:none;resize:vertical}
+textarea.paste:focus{border-color:var(--gold)}
+.namerow{display:flex;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.namerow input{background:var(--bg);border:1.5px solid var(--line);border-radius:11px;color:var(--text);
+  padding:11px 13px;font-size:15px;font-family:inherit;outline:none}
+.namerow input:focus{border-color:var(--gold)}
+.namerow .nm{flex:1;min-width:180px}
+.namerow .ic{width:70px;text-align:center;font-family:var(--emoji);font-size:18px}
+.fmt{background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:13px 15px;margin-bottom:14px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--muted);line-height:1.9;overflow-x:auto;white-space:pre}
+.preview{margin-top:14px;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.prow{display:flex;align-items:center;gap:12px;padding:9px 13px;border-bottom:1px solid var(--line);font-size:13.5px}
+.prow:last-child{border-bottom:0}
+.prow.head{background:var(--card2);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.prow .pe{font-family:var(--emoji);font-size:19px;letter-spacing:3px;min-width:86px;white-space:nowrap}
+.prow .pe img{height:1em;width:1em;vertical-align:-.12em}
+.prow .pa{flex:1;font-weight:600}
+.prow .pn{flex:1.4;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .pd{font-size:11px;color:var(--muted);min-width:56px;text-align:right}
+.prow.err{color:var(--rose);background:rgba(255,107,139,.07)}
+.packcard{display:flex;align-items:center;gap:13px;background:var(--bg);border:1px solid var(--line);
+  border-radius:13px;padding:12px 15px;margin-bottom:9px}
+.packcard .ic{font-family:var(--emoji);font-size:22px}
+.packcard .info{flex:1}
+.packcard .info b{display:block;font-size:15px}
+.packcard .info small{color:var(--muted);font-size:12px}
+.packcard button{background:transparent;border:1px solid var(--line);border-radius:9px;padding:7px 12px;
+  font-size:12px;color:var(--muted)}
+.packcard button:hover{color:var(--text);border-color:var(--gold)}
+.packcard button.del:hover{color:var(--rose);border-color:var(--rose)}
+.note{color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header id="topbar">
+  <div class="brand" onclick="goHome()">
+    <span class="mark">🧩</span>
+    <div>
+      <h1 id="brandName">Guess<em>emoji</em>ddle</h1>
+      <div class="tagline">Read the emoji. Name the thing.</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <span class="pill" id="poolPill">— puzzles</span>
+    <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark (T)">🌗</button>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<section class="screen on" id="home">
+  <div class="hero">
+    <h2>Three emoji. One answer.</h2>
+    <p>Built for a room. Put it on a projector, split people into teams, and let them shout. No slides to make, no scores to track on a whiteboard.</p>
+    <div class="demo">
+      <span class="e">🪙🔫🐴</span><span class="arrow">→</span><span class="ans">Sholay</span>
+      <small>Coin toss, the gun, the horse — that's the warm-up.</small>
+    </div>
+  </div>
+
+  <p class="sec-title">Choose how you're playing</p>
+  <div class="modes">
+    <button class="mode primary" onclick="show('setup')">
+      <span class="ic">📽️</span>
+      <div class="nm">Host a Room</div>
+      <div class="ct">One screen, 2–6 teams, you keep score. Puzzle goes up, people shout, you tap whoever got it first.</div>
+      <span class="tag">Best for ice-breakers</span>
+    </button>
+    <button class="mode" onclick="soloSetup()">
+      <span class="ic">🎯</span>
+      <div class="nm">Solo Practice</div>
+      <div class="ct">Play alone, type your answers, buy hints. Good for building your own confidence before you host.</div>
+    </button>
+    <button class="mode" onclick="openPacks()">
+      <span class="ic">✍️</span>
+      <div class="nm">Your Own Packs</div>
+      <div class="ct">Write puzzles in Excel or Sheets, paste them in, and they become a new category. Guess-the-colleague beats Bollywood every time.</div>
+    </button>
+  </div>
+
+  <p class="sec-title">What's inside</p>
+  <div class="panel" style="margin-bottom:0">
+    <div id="catSummary" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:11px"></div>
+  </div>
+</section>
+
+<!-- ================= HOST SETUP ================= -->
+<section class="screen" id="setup">
+  <div class="panel">
+    <h3>Teams</h3>
+    <div class="sub">Two to six. Teams beat individuals for an ice-breaker — it makes people actually talk to each other, and it's four buttons for you instead of fifteen.</div>
+    <div id="teamList"></div>
+    <button class="btn ghost" id="addTeam" onclick="addTeam()" style="margin-top:8px;padding:10px 16px;font-size:13.5px">+ Add team</button>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3>Category</h3>
+      <div class="sub">Mixed keeps the room guessing.</div>
+      <div class="opts" id="catOpts"></div>
+    </div>
+    <div class="panel">
+      <h3>Round length</h3>
+      <div class="sub">Ten to twelve is about eight minutes. Past fifteen, a room starts checking phones.</div>
+      <div class="opts" id="lenOpts"></div>
+      <h3 style="margin-top:20px">Timer per puzzle</h3>
+      <div class="sub">It only nudges — nothing auto-advances. You stay in control of pacing.</div>
+      <div class="opts" id="timeOpts"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Difficulty ramp</h3>
+    <div class="sub">On: easy puzzles first to warm the room up, hard ones saved for the end. Leave this on for a corporate crowd — three hard puzzles in a row kills the energy.</div>
+    <div class="opts" id="rampOpts"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" onclick="startHost()" style="font-size:16px;padding:15px 30px">Start the round →</button>
+    <button class="btn ghost" onclick="goHome()">Back</button>
+  </div>
+</section>
+
+<!-- ================= HOST GAME ================= -->
+<section class="screen" id="host">
+  <div class="stagewrap">
+    <div class="topline">
+      <span class="chip" id="hCat">Mixed</span>
+      <span class="diffdots" id="hDiff" title="Difficulty"></span>
+      <span class="spacer"></span>
+      <span class="chip" id="hCount">1 / 12</span>
+      <button class="iconbtn" onclick="toggleTheme()" title="Light / dark (T)">🌗</button>
+      <button class="iconbtn" id="soundBtn" onclick="toggleSound()" title="Sound">🔊</button>
+      <button class="iconbtn" onclick="quitHost()" title="Quit round">✕</button>
+    </div>
+    <div class="timerbar" id="tbar"><div class="t" id="tfill"></div></div>
+
+    <div class="bigstage">
+      <div class="bigemoji" id="hEmoji">🪙 🔫 🐴</div>
+      <div class="reveal" id="hReveal"></div>
+    </div>
+
+    <div class="teams" id="hTeams"></div>
+    <div class="hostbar">
+      <button class="btn ghost" id="btnReveal" onclick="revealAnswer(true)">Nobody got it — reveal</button>
+      <button class="btn" id="btnNext" onclick="nextHost()">Next puzzle →</button>
+      <div class="hint">
+        <kbd>1</kbd>–<kbd>6</kbd> award a team · <kbd>R</kbd> reveal · <kbd>Space</kbd> next · <kbd>T</kbd> theme
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOST RESULTS ================= -->
+<section class="screen" id="hostOver">
+  <div class="result">
+    <div class="medal" id="hMedal">🏆</div>
+    <h2 id="hWinner">Team A wins</h2>
+    <div class="sub" id="hSub"></div>
+    <div class="standings" id="hStandings"></div>
+    <div class="actions">
+      <button class="btn" onclick="rematch()">Rematch — same teams</button>
+      <button class="btn ghost" onclick="show('setup')">Change setup</button>
+      <button class="btn ghost" onclick="goHome()">Home</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PACKS ================= -->
+<section class="screen" id="packs">
+  <div class="panel">
+    <h3>Write your own category</h3>
+    <div class="sub">Build the puzzles in Excel or Google Sheets — four columns — then copy the rows and paste them below. Spreadsheets copy as tab-separated text, so this just works. Nothing leaves this file; packs are saved in this browser.</div>
+
+    <div class="fmt" id="fmtHelp">emoji    answer    note read out on reveal    difficulty
+🎩👓🧔    Rajesh from Finance    Never seen without the hat    easy
+📊🔥😴    Quarterly Review    Four hours. Every quarter.    medium</div>
+
+    <div class="namerow">
+      <input class="ic" id="packIcon" value="🏢" maxlength="4" title="Category icon">
+      <input class="nm" id="packName" placeholder="Category name — e.g. Guess the Colleague" maxlength="28">
+    </div>
+    <textarea class="paste" id="packPaste" placeholder="Paste your rows here…" spellcheck="false"></textarea>
+
+    <div class="actions" style="justify-content:flex-start;margin-top:14px">
+      <button class="btn" onclick="savePack()">Save pack</button>
+      <button class="btn ghost" onclick="loadSample()">Load an example</button>
+      <button class="btn ghost" onclick="$('packPaste').value='';renderPreview()">Clear</button>
+    </div>
+
+    <div id="packPreview"></div>
+    <div class="note">
+      Only the first two columns are required. Separate multiple accepted answers with a slash —
+      <code>Diwali / Deepavali</code>. Difficulty can be easy/medium/hard or 1/2/3, and defaults to medium.
+      Lines starting with <code>#</code> are ignored.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Saved packs</h3>
+    <div class="sub">These show up as categories in Host and Solo, and get mixed into 🎲 Mixed.</div>
+    <div id="packList"></div>
+  </div>
+
+  <div class="actions"><button class="btn ghost" onclick="goHome()">Back</button></div>
+</section>
+
+<!-- ================= SOLO ================= -->
+<section class="screen" id="soloPick">
+  <div class="panel">
+    <h3>Pick a category</h3>
+    <div class="sub">Ten puzzles. Three guesses each — wrong guesses now cost you, so think before you type.</div>
+    <div class="opts" id="soloCats"></div>
+  </div>
+  <div class="actions">
+    <button class="btn" onclick="startSolo()">Start</button>
+    <button class="btn ghost" onclick="goHome()">Back</button>
+  </div>
+</section>
+
+<section class="screen" id="solo">
+  <div class="bar">
+    <div class="track"><div class="fill" id="sFill"></div></div>
+    <span class="pill" id="sCount">1 / 10</span>
+  </div>
+  <div class="solostage" id="sStage">
+    <span class="pill" id="sChip">Category</span>
+    <div class="puzzle" id="sPuzzle"></div>
+    <div class="blanks" id="sBlanks"></div>
+    <div class="clue" id="sClue"></div>
+    <div class="answer">
+      <input id="sGuess" placeholder="Type your answer…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn" id="sSubmit" onclick="submitGuess()">Guess</button>
+    </div>
+    <div class="tools">
+      <button class="tool" id="tLetter" onclick="revealLetter()">🔤 Reveal a letter (−15)</button>
+      <button class="tool" id="tClue" onclick="showClue()">💡 Clue (−25)</button>
+      <button class="tool" onclick="skipQ()">⏭ Skip</button>
+    </div>
+    <div class="verdict" id="sVerdict"></div>
+    <div class="scorebar">
+      <span class="pill">Score <b id="sScore">0</b></span>
+      <span class="pill">Guesses left <b id="sLives">3</b></span>
+      <span class="pill">Streak <b id="sStreak">0</b></span>
+    </div>
+  </div>
+  <div class="actions"><button class="btn ghost" onclick="goHome()">Quit</button></div>
+</section>
+
+<section class="screen" id="soloOver">
+  <div class="result">
+    <div class="medal" id="oMedal">🏆</div>
+    <h2 id="oTitle">Nice run</h2>
+    <div class="sub" id="oSub"></div>
+    <div class="standings" id="oReview"></div>
+    <div class="actions">
+      <button class="btn" onclick="startSolo()">Play again</button>
+      <button class="btn ghost" onclick="goHome()">Home</button>
+    </div>
+  </div>
+</section>
+
+<footer id="foot">
+  Answers are matched loosely — “dilwale dulhaniya” still counts.<br>
+  Everything runs on this one file. No server, no accounts, works offline.
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
+<script>
+/* =====================================================================
+   DATA   e = emoji · a = accepted answers · h = note read out on reveal
+          d = difficulty 1 easy · 2 medium · 3 hard
+   ===================================================================== */
+const APP_NAME="Guessemojiddle";   // change here and the whole app renames
+
+const BUILTIN_CATEGORIES=[
+ {id:"bolly",name:"Bollywood",icon:"🎬"},
+ {id:"holly",name:"Hollywood",icon:"🍿"},
+ {id:"jargon",name:"Corporate Jargon",icon:"💼"},
+ {id:"people",name:"Famous People",icon:"🌟"},
+ {id:"places",name:"Places",icon:"🌍"},
+ {id:"food",name:"Food",icon:"🍲"},
+ {id:"idioms",name:"Idioms",icon:"💬"},
+ {id:"brands",name:"Brands",icon:"🏷️"},
+ {id:"cricket",name:"Cricket",icon:"🏏"},
+ {id:"nineties",name:"90s Nostalgia",icon:"📼"},
+ {id:"shows",name:"Shows & Series",icon:"📺"},
+ {id:"festivals",name:"Festivals",icon:"🪔"},
+ {id:"songs",name:"Hindi Songs",icon:"🎵"},
+];
+let CATEGORIES=[...BUILTIN_CATEGORIES];   // custom packs get appended at boot
+
+const PUZZLES={
+bolly:[
+ {e:"🪙🔫🐴",a:["Sholay"],d:1,h:"1975. Jai, Veeru, and a coin that always landed the same way."},
+ {e:"3️⃣🤪🎓",a:["3 Idiots","Three Idiots"],d:1,h:"Rancho, an engineering college, and 'All is well'."},
+ {e:"❤️🤵👰🚂",a:["Dilwale Dulhania Le Jayenge","DDLJ"],d:1,h:"Mustard fields and a hand reaching from a moving train."},
+ {e:"🤼‍♀️🥇👨‍👧‍👧",a:["Dangal"],d:1,h:"A father trains his daughters to wrestle for gold."},
+ {e:"💪🏰🌊",a:["Baahubali","Bahubali"],d:1,h:"'Kattappa ne … kyun mara?'"},
+ {e:"💥🏍️🕶️",a:["Dhoom"],d:1,h:"Bike-riding thieves versus ACP Jai Dixit."},
+ {e:"😄😢🔁",a:["Kabhi Khushi Kabhie Gham","K3G"],d:2,h:"Literally 'sometimes joy, sometimes sorrow'."},
+ {e:"🕉️☮️🕉️",a:["Om Shanti Om"],d:2,h:"Reincarnation, a burning studio, and 70s Bollywood."},
+ {e:"🐒🧔👧🇵🇰",a:["Bajrangi Bhaijaan"],d:2,h:"A Hanuman devotee walks a mute girl home across the border."},
+ {e:"👽📻🎧",a:["PK"],d:2,h:"An alien lands in Rajasthan and loses his remote."},
+ {e:"🪂🇪🇸🐂",a:["Zindagi Na Milegi Dobara","ZNMD"],d:2,h:"Three friends, a road trip through Spain, three fears."},
+ {e:"🎤🏙️👦",a:["Gully Boy"],d:2,h:"Rap out of the Mumbai chawls. 'Apna time aayega'."},
+ {e:"🏏🇬🇧🌾",a:["Lagaan"],d:2,h:"Villagers play cricket to escape a colonial tax."},
+ {e:"⭐🌍🎨",a:["Taare Zameen Par"],d:2,h:"A dyslexic boy and the art teacher who finally sees him."},
+ {e:"🎨✊🇮🇳",a:["Rang De Basanti"],d:2,h:"College friends re-enact freedom fighters, then live it."},
+ {e:"❤️⏳🗽",a:["Kal Ho Naa Ho"],d:2,h:"New York, a dying man, and the loveliest goodbye."},
+ {e:"🏑👩‍🦰🇮🇳",a:["Chak De India","Chak De! India"],d:2,h:"A disgraced captain coaches the women's hockey team."},
+ {e:"🧠📸🔁",a:["Ghajini"],d:2,h:"Short-term memory loss, tattoos, and Polaroids."},
+ {e:"👻👗🚪",a:["Stree"],d:2,h:"'O Stree, kal aana' — painted on every door in Chanderi."},
+ {e:"👻💃🏰",a:["Bhool Bhulaiyaa"],d:2,h:"Manjulika, a haveli, and Dr. Aditya Shrivastav."},
+ {e:"🚰💪🇵🇰",a:["Gadar","Gadar Ek Prem Katha"],d:2,h:"Sunny Deol, Partition, and one uprooted hand pump."},
+ {e:"👽🌈🧒",a:["Koi Mil Gaya"],d:2,h:"Jadoo the alien and a boy named Rohit."},
+ {e:"📞💰😂",a:["Hera Pheri"],d:2,h:"Wrong number, ransom money, Baburao's garage."},
+ {e:"🍷💔🕯️",a:["Devdas"],d:2,h:"Paro, Chandramukhi, and a bottle that never empties."},
+ {e:"⏰👫🚆",a:["Jab We Met"],d:2,h:"Geet misses her train and Aditya's life restarts."},
+ {e:"🤗👨‍⚕️",a:["Munna Bhai MBBS","Munnabhai MBBS"],d:2,h:"A goon fakes his way into medical college. Jaadu ki jhappi."},
+ {e:"🎹🙈🐰",a:["Andhadhun"],d:3,h:"A pianist pretending to be blind witnesses a murder."},
+ {e:"📺👨‍👩‍👧🕳️",a:["Drishyam"],d:3,h:"A cable-TV owner builds an alibi entirely out of movies."},
+ {e:"👑🎒🇫🇷",a:["Queen"],d:3,h:"A jilted bride goes on her honeymoon alone."},
+ {e:"🚀🏡🇮🇳",a:["Swades"],d:3,h:"A NASA engineer returns to his village and stays."},
+ {e:"👑💃🕌",a:["Mughal-e-Azam"],d:3,h:"Salim, Anarkali, and the wrath of Akbar."},
+ {e:"⬛🙈🙉👩‍🏫",a:["Black"],d:3,h:"A deaf-blind girl, her teacher, and the word 'water'."},
+ {e:"🇮🇳❤️🇵🇰⚖️",a:["Veer Zaara","Veer-Zaara"],d:3,h:"22 years in a Pakistani jail for a love across the border."},
+ {e:"🤰🕵️‍♀️🚇",a:["Kahaani"],d:3,h:"A pregnant woman searches Kolkata for a husband who may not exist."},
+ {e:"🍬🙉🙊",a:["Barfi","Barfi!"],d:3,h:"Darjeeling, silent comedy, and Jhilmil."},
+],
+holly:[
+ {e:"🚢🧊💔",a:["Titanic"],d:1,h:"'I'm the king of the world' — then the iceberg."},
+ {e:"🦁👑🌅",a:["The Lion King","Lion King"],d:1,h:"Simba, Mufasa, Pride Rock."},
+ {e:"🦕🏝️🧬",a:["Jurassic Park"],d:1,h:"Mosquito in amber, cloned dinosaurs, one island."},
+ {e:"🔍🐠🌊",a:["Finding Nemo"],d:1,h:"A clownfish dad crosses an ocean. Just keep swimming."},
+ {e:"❄️👸⛄",a:["Frozen"],d:1,h:"Elsa, Anna, and a snowman who dreams of summer."},
+ {e:"🕷️🧑🕸️",a:["Spider-Man","Spiderman"],d:1,h:"With great power comes great responsibility."},
+ {e:"🧸🤠🚀",a:["Toy Story"],d:1,h:"Woody, Buzz, 'to infinity and beyond'."},
+ {e:"⭐⚔️🌌",a:["Star Wars"],d:1,h:"A galaxy far, far away."},
+ {e:"⚡🧙‍♂️🦉",a:["Harry Potter"],d:1,h:"The boy who lived. Hogwarts. Hedwig."},
+ {e:"🦸‍♂️🛡️🔨",a:["The Avengers","Avengers"],d:1,h:"Earth's mightiest heroes assemble."},
+ {e:"🏠😱👦",a:["Home Alone"],d:1,h:"Kevin is forgotten at Christmas and books two burglars."},
+ {e:"🏴‍☠️⚓🌴",a:["Pirates of the Caribbean"],d:1,h:"Captain Jack Sparrow and the Black Pearl."},
+ {e:"🌙🍌👨‍🦲",a:["Despicable Me"],d:1,h:"Gru wants to steal the moon. Minions everywhere."},
+ {e:"🥋🐼🥟",a:["Kung Fu Panda"],d:1,h:"A noodle-shop panda becomes the Dragon Warrior."},
+ {e:"🟢👹🧅🏰",a:["Shrek"],d:1,h:"Ogres are like onions. They have layers."},
+ {e:"🦾❤️🔴",a:["Iron Man"],d:1,h:"Arc reactor, red and gold, Tony Stark."},
+ {e:"🤵🇮🇹🐎",a:["The Godfather","Godfather"],d:2,h:"An offer you can't refuse — and a horse in the bed."},
+ {e:"💊🕶️🟩",a:["The Matrix","Matrix"],d:2,h:"Red pill or blue pill. Green falling code."},
+ {e:"🎈🏠👴",a:["Up"],d:2,h:"Balloons carry a house toward Paradise Falls."},
+ {e:"💤🌀🌃",a:["Inception"],d:2,h:"A dream within a dream. The top keeps spinning."},
+ {e:"🚀🌽🕳️",a:["Interstellar"],d:2,h:"Corn blight, a wormhole, time bending near a black hole."},
+ {e:"🦈🏖️🚤",a:["Jaws"],d:2,h:"'You're gonna need a bigger boat.'"},
+ {e:"🐀👨‍🍳🍲",a:["Ratatouille"],d:2,h:"A Parisian rat cooks under a chef's hat. Anyone can cook."},
+ {e:"🏝️🏐✈️",a:["Cast Away","Castaway"],d:2,h:"A FedEx man, a deserted island, and Wilson."},
+ {e:"🏃‍♂️🍫🪶",a:["Forrest Gump"],d:2,h:"Life is like a box of chocolates."},
+ {e:"💀🎸🇲🇽",a:["Coco"],d:2,h:"The Land of the Dead, a guitar, and 'Remember Me'."},
+ {e:"🛶🐅🌊",a:["Life of Pi"],d:2,h:"A boy shares a lifeboat with a tiger named Richard Parker."},
+ {e:"🤖🌱🚀",a:["WALL-E","Wall E"],d:2,h:"A lonely trash robot finds a seedling and follows EVE."},
+ {e:"🎩🍫🏭",a:["Charlie and the Chocolate Factory"],d:2,h:"Golden tickets and Willy Wonka."},
+ {e:"🕰️🚗⚡",a:["Back to the Future"],d:2,h:"A DeLorean, 88 mph, and 1955."},
+ {e:"🌍🚀👩‍🚀",a:["Gravity"],d:3,h:"Adrift after debris destroys the shuttle."},
+ {e:"🐺🏙️💵",a:["The Wolf of Wall Street"],d:3,h:"Jordan Belfort, penny stocks, spectacular excess."},
+],
+people:[
+ {e:"🍎🧲👨‍🔬",a:["Isaac Newton","Newton"],d:1,h:"Gravity, three laws of motion, one falling fruit."},
+ {e:"👓☮️🇮🇳",a:["Mahatma Gandhi","Gandhi","Mohandas Gandhi"],d:1,h:"Round glasses, the salt march, non-violence."},
+ {e:"🏏🇮🇳💯",a:["Sachin Tendulkar","Sachin"],d:1,h:"The Little Master. 100 international centuries."},
+ {e:"🚀🚗🐦",a:["Elon Musk"],d:1,h:"Rockets, electric cars, and a bought bird app."},
+ {e:"⚽🇦🇷🐐",a:["Lionel Messi","Messi"],d:1,h:"Left foot, Barcelona, 2022 World Cup."},
+ {e:"⚽🇵🇹💪",a:["Cristiano Ronaldo","Ronaldo"],d:1,h:"SIUUU."},
+ {e:"🧪⚛️🤯",a:["Albert Einstein","Einstein"],d:1,h:"E = mc², relativity, and that hair."},
+ {e:"🕺🧤🌙",a:["Michael Jackson","MJ"],d:2,h:"One sequined glove and the moonwalk."},
+ {e:"💻🪟💰",a:["Bill Gates"],d:2,h:"Built a software giant, then gave the money away."},
+ {e:"🍎📱🖤👕",a:["Steve Jobs"],d:2,h:"Black turtleneck. 'One more thing…'"},
+ {e:"🎨👂🌌",a:["Vincent van Gogh","Van Gogh"],d:2,h:"Starry Night, sunflowers, and a missing ear."},
+ {e:"🖼️😊🚁",a:["Leonardo da Vinci","Da Vinci"],d:2,h:"The Mona Lisa and flying-machine sketches."},
+ {e:"🥊🦋🐝",a:["Muhammad Ali","Ali"],d:2,h:"'Float like a butterfly, sting like a bee.'"},
+ {e:"🇿🇦✊🕊️",a:["Nelson Mandela","Mandela"],d:2,h:"27 years in prison, then president."},
+ {e:"💡🔦🔬",a:["Thomas Edison","Edison"],d:2,h:"A thousand patents and a light bulb."},
+ {e:"🚀🇮🇳📖",a:["APJ Abdul Kalam","Abdul Kalam","Kalam"],d:2,h:"India's Missile Man, then President, then Wings of Fire."},
+ {e:"🎭✍️🇬🇧",a:["William Shakespeare","Shakespeare"],d:2,h:"Hamlet, Macbeth, and 154 sonnets."},
+ {e:"📚👧🎓🇵🇰",a:["Malala Yousafzai","Malala"],d:2,h:"Shot for going to school; youngest Nobel laureate."},
+ {e:"👩‍🔬☢️🏅",a:["Marie Curie"],d:3,h:"Radioactivity, polonium and radium, two Nobel prizes."},
+ {e:"🧠♿🕳️",a:["Stephen Hawking","Hawking"],d:3,h:"A Brief History of Time. Black holes."},
+ {e:"🎤🇮🇳🕊️",a:["Lata Mangeshkar","Lata"],d:3,h:"The Nightingale of India."},
+ {e:"🧮🕉️♾️",a:["Srinivasa Ramanujan","Ramanujan"],d:3,h:"Self-taught mathematician from Madras. 1729."},
+],
+places:[
+ {e:"🗼🥐❤️",a:["Paris"],d:1,h:"City of light, and an iron tower."},
+ {e:"🗽🍎🌃",a:["New York","New York City","NYC"],d:1,h:"The Big Apple."},
+ {e:"🕌🤍💎",a:["Taj Mahal"],d:1,h:"White marble on the Yamuna, Agra."},
+ {e:"🍕🏛️🐺",a:["Rome"],d:1,h:"The Colosseum — and a wolf that raised twins."},
+ {e:"🐨🦘🏄",a:["Australia"],d:1,h:"A continent, a country, and a very big reef."},
+ {e:"🍣🗻🎌",a:["Japan"],d:1,h:"Mount Fuji, bullet trains, cherry blossom."},
+ {e:"🐫🏜️🔺",a:["Egypt"],d:1,h:"Pyramids, the Nile, the Sphinx."},
+ {e:"🐼🏯🥢",a:["China"],d:1,h:"There's a rather long wall."},
+ {e:"🍁🏒🦫",a:["Canada"],d:1,h:"A red leaf on the flag."},
+ {e:"⚽🌴🎉🌳",a:["Brazil"],d:1,h:"Carnival, the Amazon, five World Cups."},
+ {e:"🍺🚗🥨",a:["Germany"],d:2,h:"Oktoberfest, autobahns, pretzels."},
+ {e:"💃🐂🥘",a:["Spain"],d:2,h:"Flamenco, bulls, paella."},
+ {e:"🏔️🍫⌚",a:["Switzerland"],d:2,h:"Alps, neutrality, and very precise timekeeping."},
+ {e:"🌴🎬⭐",a:["Hollywood","Los Angeles","LA"],d:2,h:"Big white letters on a hillside."},
+ {e:"🏙️🐪💰",a:["Dubai"],d:2,h:"The world's tallest building, on sand."},
+ {e:"🏛️🏺🫒",a:["Greece"],d:2,h:"The Parthenon and olive groves."},
+ {e:"🌷🚲🧀",a:["Netherlands","Holland"],d:2,h:"Tulips, canals, and more bikes than people."},
+ {e:"🏖️🥥⛪",a:["Goa"],d:2,h:"India's smallest state, beaches and Portuguese churches."},
+ {e:"❄️🐧🧊",a:["Antarctica"],d:2,h:"No countries, no permanent residents, plenty of ice."},
+ {e:"🎡🍜🦁",a:["Singapore"],d:3,h:"A city-state with a lion in its name and a merlion on its shore."},
+ {e:"⛩️🍵🏯",a:["Kyoto"],d:3,h:"Japan's old capital. Thousands of shrines."},
+ {e:"🏔️🙏🚩",a:["Nepal"],d:3,h:"Everest's home, and the only non-rectangular flag."},
+],
+food:[
+ {e:"🍚🌶️🍗",a:["Biryani"],d:1,h:"Layered rice and meat, sealed and slow-cooked."},
+ {e:"☕🌿🥛",a:["Masala Chai","Chai"],d:1,h:"Boiled tea with ginger, cardamom, and too much sugar."},
+ {e:"🥟🍲🥢",a:["Momos","Momo"],d:1,h:"Steamed Himalayan dumplings with fiery red chutney."},
+ {e:"🧀🍰",a:["Cheesecake"],d:1,h:"Two words, glued together, exactly as drawn."},
+ {e:"🐟🍟🇬🇧",a:["Fish and Chips"],d:1,h:"Newspaper, vinegar, seaside."},
+ {e:"🍞🧄",a:["Garlic Bread"],d:1,h:"Say the two pictures out loud."},
+ {e:"🍜🥢🍥",a:["Ramen"],d:1,h:"Broth, noodles, soft egg, a sheet of nori."},
+ {e:"🥔🍔🌶️",a:["Vada Pav"],d:2,h:"Mumbai's potato burger. Twenty rupees."},
+ {e:"🧈🐓",a:["Butter Chicken","Murgh Makhani"],d:2,h:"Read the two emoji literally, in order."},
+ {e:"🥞🥔🥥",a:["Masala Dosa","Dosa"],d:2,h:"Fermented rice crepe, potato filling, coconut chutney."},
+ {e:"🍮🌀🍯",a:["Jalebi"],d:2,h:"Deep-fried spirals drowned in syrup."},
+ {e:"🍦🥪",a:["Ice Cream Sandwich"],d:2,h:"Both pictures, one after the other."},
+ {e:"🥣🍅🌶️🫓",a:["Pav Bhaji"],d:2,h:"Mashed vegetable curry with buttered buns."},
+ {e:"🥩🔥🍢",a:["Kebab","Seekh Kebab"],d:2,h:"Spiced minced meat on a skewer over coals."},
+ {e:"🥤🍋🧂",a:["Nimbu Pani","Shikanji","Lemonade"],d:2,h:"Lemon, water, salt, sugar. Summer in a glass."},
+ {e:"🫓🧈🔥",a:["Butter Naan","Naan"],d:2,h:"Tandoor flatbread, brushed while hot."},
+ {e:"🥥🍛🐟",a:["Fish Curry"],d:2,h:"Coconut, tamarind, and the day's catch."},
+ {e:"🍚🥛🍬🌰",a:["Kheer","Rice Pudding"],d:2,h:"Milk, rice, cardamom. The default Indian dessert."},
+ {e:"🌙🥖🇫🇷",a:["Croissant"],d:2,h:"Crescent-shaped, and the French word says so."},
+ {e:"🌹🫐🍯",a:["Gulab Jamun"],d:3,h:"'Gulab' means rose. 'Jamun' is a dark berry. Fried dough in rose syrup."},
+ {e:"🍦🍧🥭",a:["Kulfi"],d:3,h:"Dense frozen milk on a stick — no churning, so it never goes soft."},
+ {e:"🧆🫓🥗",a:["Falafel"],d:3,h:"Fried chickpea balls in pita with tahini."},
+],
+idioms:[
+ {e:"🎂🍰😌",a:["Piece of cake","A piece of cake"],d:1,h:"Something very easy."},
+ {e:"🌧️🐱🐶",a:["Raining cats and dogs","It's raining cats and dogs"],d:1,h:"Very heavy rain."},
+ {e:"🧊💔🤝",a:["Break the ice","Breaking the ice"],d:1,h:"Easing the awkwardness when strangers meet. Rather on the nose today."},
+ {e:"💰🌳❌",a:["Money doesn't grow on trees"],d:1,h:"What every parent eventually says."},
+ {e:"🌙💙1️⃣",a:["Once in a blue moon"],d:1,h:"Very rarely."},
+ {e:"📚🖼️🙅",a:["Don't judge a book by its cover"],d:1,h:"Appearances mislead."},
+ {e:"🐱🎒🚪",a:["Let the cat out of the bag","Cat out of the bag"],d:2,h:"To accidentally give away a secret."},
+ {e:"🐦🐦🪨",a:["Kill two birds with one stone","Two birds one stone"],d:2,h:"Solve two problems with one action."},
+ {e:"⏰🐦🐛",a:["The early bird catches the worm","Early bird catches the worm"],d:2,h:"Get there first and you win."},
+ {e:"🥛😭❌",a:["Don't cry over spilled milk","Crying over spilled milk"],d:2,h:"No use regretting what can't be undone."},
+ {e:"🎯🔨🔩",a:["Hit the nail on the head"],d:2,h:"To be exactly right."},
+ {e:"🐘🚪🛋️",a:["Elephant in the room","The elephant in the room"],d:2,h:"The obvious problem nobody will mention."},
+ {e:"🧺🥚🥚",a:["Don't put all your eggs in one basket"],d:2,h:"Spread the risk."},
+ {e:"✂️🏃💨",a:["Cut to the chase"],d:2,h:"Skip the preamble. Get to the point."},
+ {e:"🐍🌿👀",a:["Snake in the grass","A snake in the grass"],d:2,h:"A hidden, treacherous person."},
+ {e:"🥔🔥🤲",a:["Hot potato","A hot potato"],d:2,h:"A topic nobody wants to hold on to."},
+ {e:"🐟🌊🌊",a:["Plenty of fish in the sea","There are plenty of fish in the sea"],d:2,h:"Said after every break-up."},
+ {e:"⛈️🌈☀️",a:["Every cloud has a silver lining"],d:2,h:"Bad situations still hide something good."},
+ {e:"🔥🎮⚠️",a:["Playing with fire","Don't play with fire"],d:2,h:"Taking a dangerous risk."},
+ {e:"🍳🥚🧺",a:["Don't count your chickens before they hatch"],d:2,h:"Don't assume success too early."},
+ {e:"🐦✋🌳🐦🐦",a:["A bird in the hand is worth two in the bush","Bird in the hand"],d:3,h:"What you have beats what you might get."},
+ {e:"👂🧱",a:["Walls have ears","The walls have ears"],d:3,h:"Careful — you may be overheard."},
+],
+brands:[
+ {e:"🍎🖤📱",a:["Apple"],d:1,h:"Cupertino. A bitten fruit."},
+ {e:"🎥🍿🔴",a:["Netflix"],d:1,h:"'Are you still watching?'"},
+ {e:"☕🧜‍♀️🟢",a:["Starbucks"],d:1,h:"Green siren, misspelt names on cups."},
+ {e:"🍔🤡🟨",a:["McDonald's","McDonalds"],d:1,h:"Golden arches."},
+ {e:"🥤🔴⚪🎅",a:["Coca Cola","Coca-Cola","Coke"],d:1,h:"Atlanta, 1886. Red cans, and a red Santa they helped popularise."},
+ {e:"✔️👟🏃",a:["Nike"],d:1,h:"Just do it. Named after a Greek goddess."},
+ {e:"📦😊➡️",a:["Amazon"],d:1,h:"An arrow pointing from A to Z."},
+ {e:"🚗⚡🔋",a:["Tesla"],d:1,h:"Named after an inventor, run by a memer."},
+ {e:"📸🌈🖼️",a:["Instagram"],d:1,h:"Squares, filters, then Stories."},
+ {e:"👻💬🟨",a:["Snapchat"],d:1,h:"Messages that disappear."},
+ {e:"🎵📱🕺",a:["TikTok","Tik Tok"],d:1,h:"Short vertical video, infinite scroll."},
+ {e:"🎬🎢🐭",a:["Disney"],d:1,h:"A mouse built a castle."},
+ {e:"🚕📱🖤",a:["Uber"],d:1,h:"Tap a button, get a ride."},
+ {e:"🎧🎵🟢",a:["Spotify"],d:1,h:"Green, Swedish, wrapped every December."},
+ {e:"🐦💬🔵",a:["Twitter","X"],d:1,h:"280 characters, then a rebrand to a single letter."},
+ {e:"🔍🌈🔤",a:["Google"],d:2,h:"Named after a misspelt very large number."},
+ {e:"🪟💻🏢",a:["Microsoft"],d:2,h:"Redmond. Four coloured panes."},
+ {e:"🍄🎮🔴",a:["Nintendo"],d:2,h:"Mario, Zelda, and the Switch."},
+ {e:"🏨🛏️🌍",a:["Airbnb"],d:2,h:"Stay in somebody else's house."},
+ {e:"🛒🇮🇳📦",a:["Flipkart"],d:2,h:"India's home-grown e-commerce, out of Bengaluru."},
+ {e:"📶📱🇮🇳🆓",a:["Jio","Reliance Jio"],d:2,h:"Free data in 2016 rewired the Indian internet."},
+ {e:"🍫🟣🥛",a:["Cadbury","Dairy Milk"],d:2,h:"Purple wrapper. A glass and a half."},
+],
+jargon:[
+ {e:"🤿📊",a:["Deep Dive"],d:1,h:"Say both pictures out loud. Means 'read the thing properly'."},
+ {e:"📦💭",a:["Think Outside The Box"],d:1,h:"Said by people who have never left the box."},
+ {e:"🏓💬",a:["Ping Me"],d:1,h:"Table tennis, then a message. 'Ping me' — the ancestor of 'hey, quick call?'"},
+ {e:"💡🌩️",a:["Brainstorm","Brainstorming"],d:1,h:"An idea plus a storm. Nobody has ever had one that worked."},
+ {e:"📋✅",a:["Action Item"],d:1,h:"The thing written down at the end of a meeting and never done."},
+ {e:"🧊🗣️",a:["Ice Breaker","Icebreaker"],d:1,h:"You're inside one right now."},
+ {e:"🍎⬇️🌳",a:["Low Hanging Fruit"],d:2,h:"The easy wins — grabbed first, celebrated loudest."},
+ {e:"🔄📞",a:["Circle Back"],d:2,h:"'Let's circle back on that' means we will never speak of it again."},
+ {e:"⚡🤝",a:["Synergy"],d:2,h:"Two things being worth more together. Usually said just before a merger."},
+ {e:"📶🧠",a:["Bandwidth"],d:2,h:"'I don't have the bandwidth' — a polite no."},
+ {e:"⚾👋",a:["Touch Base"],d:2,h:"Borrowed from baseball by people who have never played baseball."},
+ {e:"🔌📴",a:["Take It Offline"],d:2,h:"Said when two people start arguing on a 30-person call."},
+ {e:"🎩🔄",a:["Wear Many Hats","Wearing Many Hats"],d:2,h:"You are doing three jobs for one salary."},
+ {e:"🚌👥⬇️",a:["Throw Under The Bus","Thrown Under The Bus"],d:2,h:"Blaming a colleague, publicly, to save yourself."},
+ {e:"🏃🎯▶️",a:["Hit The Ground Running"],d:2,h:"Expected of every new joiner on day one."},
+ {e:"🔢🏃",a:["Run The Numbers"],d:2,h:"Check the maths before promising anything."},
+ {e:"🐦👁️🗺️",a:["Birds Eye View","Bird's Eye View"],d:2,h:"The high-level picture, minus every inconvenient detail."},
+ {e:"🌊🔥",a:["Boil The Ocean"],d:3,h:"Attempting something impossibly large. 'Let's not boil the ocean here.'"},
+ {e:"🚩🎌",a:["Run It Up The Flagpole"],d:3,h:"Float an idea and see who salutes it."},
+ {e:"🧵📈",a:["Move The Needle"],d:3,h:"Make a difference big enough to actually show up in the numbers."},
+ {e:"🅿️💡",a:["Parking Lot","Park That"],d:3,h:"Where good ideas go to be forgotten with dignity."},
+ {e:"🎯🥅➡️",a:["Moving The Goalposts"],d:3,h:"Changing the target after the work is done."},
+],
+cricket:[
+ {e:"👑🏏🇮🇳",a:["Virat Kohli","Kohli"],d:1,h:"Chase master. The aggression, the celebration."},
+ {e:"❄️🧢🏏",a:["MS Dhoni","Dhoni","Mahendra Singh Dhoni"],d:1,h:"Captain Cool. The helicopter shot, the 2011 final six."},
+ {e:"🎳🏏",a:["Bowled"],d:1,h:"Stumps everywhere. The most satisfying dismissal."},
+ {e:"6️⃣🏏🎉",a:["Sixer","Six"],d:1,h:"Over the ropes, no bounce."},
+ {e:"🏆🇮🇳2️⃣0️⃣1️⃣1️⃣",a:["2011 World Cup","World Cup 2011"],d:1,h:"Wankhede. Dhoni finishes it in style."},
+ {e:"🦆0️⃣🏏",a:["Duck","Out for a duck"],d:2,h:"Dismissed without scoring. The bird comes from the shape of the zero."},
+ {e:"🎩🏏3️⃣",a:["Hat Trick","Hat-trick"],d:2,h:"Three wickets in three balls."},
+ {e:"🦵⬅️🎯",a:["LBW","Leg Before Wicket"],d:2,h:"The pad got in the way of a ball heading for the stumps."},
+ {e:"🏏🏃🏃❌",a:["Run Out"],d:2,h:"The one dismissal where two people are to blame."},
+ {e:"🌀🖐️🏏",a:["Spin Bowling","Spinner"],d:2,h:"Slow, flighted, and far more dangerous than it looks."},
+ {e:"🦁💛🏏",a:["Chennai Super Kings","CSK"],d:2,h:"Yellow army, Chepauk, whistle podu."},
+ {e:"💙🏏🌊",a:["Mumbai Indians","MI"],d:2,h:"Five IPL titles and a Wankhede home crowd."},
+ {e:"🇮🇳🏆1️⃣9️⃣8️⃣3️⃣",a:["1983 World Cup"],d:2,h:"Kapil's Devils beat the West Indies at Lord's."},
+ {e:"🏏🔴✨",a:["Reverse Swing"],d:3,h:"An old ball moving the wrong way. Pakistan's gift to fast bowling."},
+ {e:"🧤⚡🏏",a:["Stumped"],d:3,h:"You left your crease, the keeper didn't miss."},
+ {e:"🏏🌙🎨",a:["Day Night Test","Pink Ball Test"],d:3,h:"Test cricket under lights, with a pink ball."},
+],
+nineties:[
+ {e:"⚡🦸‍♂️🇮🇳",a:["Shaktimaan"],d:1,h:"Sunday mornings. The spinning transformation."},
+ {e:"🍜2️⃣⏱️",a:["Maggi"],d:1,h:"Two-minute noodles that always took five."},
+ {e:"🐍📱🔢",a:["Snake","Nokia Snake"],d:1,h:"The only game on the phone, and it was enough."},
+ {e:"📱🔨🛡️",a:["Nokia 3310"],d:1,h:"Reportedly survivable from any height."},
+ {e:"📺🌈🎶",a:["Doordarshan","DD"],d:2,h:"One channel, the whole country, and that colour-bars logo."},
+ {e:"🎧📼🚶",a:["Walkman"],d:2,h:"Cassette in your pocket, headphones on, batteries dying."},
+ {e:"📼⏪🎬",a:["VCR","Video Cassette"],d:2,h:"Be kind, rewind."},
+ {e:"☎️🔢🏠",a:["Landline"],d:2,h:"One phone, in the hallway, and everyone listening."},
+ {e:"🎮🍄🔧",a:["Super Mario","Mario"],d:2,h:"The plumber, the mushroom, the pipes."},
+ {e:"💿🎵📀",a:["Compact Disc","CD"],d:2,h:"Rainbow on the back, scratched within a week."},
+ {e:"🖊️💧📓",a:["Fountain Pen","Ink Pen"],d:2,h:"Leaked into your shirt pocket at least once."},
+ {e:"📻🎶🌅",a:["Radio"],d:2,h:"Before playlists, someone else picked the songs."},
+ {e:"🥤🍋🇮🇳",a:["Limca"],d:3,h:"Lime-flavoured, cloudy, and it had its own book of records."},
+ {e:"🧊🥤🍊",a:["Rasna"],d:3,h:"'I love you Rasna.' A powder that became a summer."},
+ {e:"💾🖥️🐢",a:["Floppy Disk"],d:3,h:"1.44 MB. The save icon outlived the object."},
+],
+shows:[
+ {e:"👑🐉❄️",a:["Game of Thrones","GOT"],d:1,h:"Winter came. The ending did not go well."},
+ {e:"🔬🧪🚐",a:["Breaking Bad"],d:1,h:"A chemistry teacher, a camper van, and a very bad decision."},
+ {e:"🙃🔦👾",a:["Stranger Things"],d:1,h:"Hawkins, the Upside Down, and Eleven."},
+ {e:"☕6️⃣👫",a:["Friends"],d:1,h:"A coffee shop, an orange couch, ten years."},
+ {e:"💰🎭🇪🇸",a:["Money Heist","La Casa de Papel"],d:1,h:"Red jumpsuits, Dalí masks, Bella Ciao."},
+ {e:"🦑🔴🟢",a:["Squid Game"],d:1,h:"Children's games, lethal stakes, a giant doll."},
+ {e:"🏢📎🐻",a:["The Office"],d:2,h:"Scranton, a paper company, and a documentary crew nobody explains."},
+ {e:"🕵️‍♂️🇬🇧🎻",a:["Sherlock"],d:2,h:"221B Baker Street, updated for mobile phones."},
+ {e:"🧟‍♂️🏹🚶",a:["The Walking Dead"],d:2,h:"A crossbow, a sheriff, and a great many walkers."},
+ {e:"👑🇬🇧📜",a:["The Crown"],d:2,h:"Elizabeth II, decade by decade."},
+ {e:"🔫🇮🇳🪑",a:["Mirzapur"],d:2,h:"Kaleen Bhaiya, the gaddi, and Purvanchal."},
+ {e:"🕵️🇮🇳👨‍👩‍👧",a:["The Family Man"],d:2,h:"A middle-class dad who is also a secret agent."},
+ {e:"🌾🏢🇮🇳",a:["Panchayat"],d:3,h:"An engineering graduate stuck as a village secretary in Phulera."},
+ {e:"🚬🕉️🔫",a:["Sacred Games"],d:3,h:"Ganesh Gaitonde, Sartaj Singh, and 25 days."},
+],
+festivals:[
+ {e:"🪔✨🎆",a:["Diwali","Deepavali"],d:1,h:"Festival of lights. Lamps, sweets, and far too many crackers."},
+ {e:"🎨💦🌈",a:["Holi"],d:1,h:"Colours, water, and no white clothes survive."},
+ {e:"🌙🕌🤲",a:["Eid"],d:1,h:"The crescent is sighted and the fasting ends."},
+ {e:"🎄🎅⭐",a:["Christmas"],d:1,h:"Tree, star, and a man in red."},
+ {e:"🧵👦👧",a:["Raksha Bandhan","Rakhi"],d:1,h:"A thread tied on the wrist, a promise, and cash."},
+ {e:"🐘🌺🌊",a:["Ganesh Chaturthi","Ganpati"],d:2,h:"Ten days of Ganpati, then immersion in the sea."},
+ {e:"🪁☀️🌾",a:["Makar Sankranti","Uttarayan"],d:2,h:"Kites fill the sky and the sun turns north."},
+ {e:"💃🥢9️⃣",a:["Navratri"],d:2,h:"Nine nights of garba and dandiya."},
+ {e:"🏹🔥👹",a:["Dussehra","Vijayadashami"],d:2,h:"Ravana burns. Good beats evil, loudly."},
+ {e:"🌾🥁🇮🇳",a:["Baisakhi","Vaisakhi"],d:3,h:"Punjab's harvest festival, and the founding of the Khalsa."},
+ {e:"🌕🥛🍯",a:["Pongal"],d:3,h:"Tamil harvest festival. Rice boils over — that's the point."},
+ {e:"🚣🌴🍛",a:["Onam"],d:3,h:"Kerala. Snake boats and a sadya served on a banana leaf."},
+ {e:"🔥🌾🥜",a:["Lohri"],d:3,h:"A bonfire, popcorn and peanuts thrown in, in the Punjabi winter."},
+],
+songs:[
+ {e:"🫵❤️🎵",a:["Tum Hi Ho"],d:2,h:"Aashiqui 2. Read the emoji literally: 'you only are'."},
+ {e:"🚂💃🎶",a:["Chaiyya Chaiyya"],d:2,h:"Dil Se. Shah Rukh dancing on the roof of a moving train."},
+ {e:"✊🎵🇮🇳",a:["Jai Ho"],d:2,h:"Slumdog Millionaire. It won an Oscar."},
+ {e:"🌧️💦💃",a:["Tip Tip Barsa Paani"],d:2,h:"Mohra. A yellow saree in the rain."},
+ {e:"🎨💦🔫",a:["Balam Pichkari"],d:3,h:"Yeh Jawaani Hai Deewani. A Holi song — pichkari is the water gun."},
+ {e:"💔🌾🎶",a:["Channa Mereya"],d:3,h:"Ae Dil Hai Mushkil. Arijit at his most devastating."},
+ {e:"🌿✋👰",a:["Mehndi Laga Ke Rakhna"],d:3,h:"DDLJ. The pre-wedding song everyone still plays."},
+ {e:"👸💃🔥",a:["Deewani Mastani"],d:3,h:"Bajirao Mastani. The mirrored palace."},
+ {e:"🌙⭐❤️",a:["Chand Sifarish"],d:3,h:"Fanaa. The moon puts in a good word for him."},
+ {e:"💛🌼🎓",a:["Give Me Some Sunshine"],d:3,h:"3 Idiots. Sung on a hostel roof."},
+]};
+
+/* =====================================================================
+   SHARED HELPERS
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const store = {
+  get(k,f){ try{ const v=localStorage.getItem(k); return v===null?f:v; }catch(e){ return f; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+/* grapheme-safe emoji spacing: flags and ZWJ sequences must not be split */
+const SEG = (typeof Intl!=="undefined" && Intl.Segmenter)
+  ? new Intl.Segmenter(undefined,{granularity:"grapheme"}) : null;
+function graphemes(str){
+  if(SEG) return [...SEG.segment(str)].map(s=>s.segment);
+  return str.match(/(?:\p{RI}\p{RI}|\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?)*|[\d#*]️?⃣|.)/gsu)||[str];
+}
+function emo(s){ return graphemes(s).join(" "); }
+
+function paint(el){
+  if(typeof twemoji==="undefined"||!el) return;
+  try{
+    twemoji.parse(el,{folder:"svg",ext:".svg"});
+    el.querySelectorAll("img.emoji").forEach(img=>{
+      img.onerror=()=>img.replaceWith(document.createTextNode(img.alt||""));
+    });
+  }catch(e){}
+}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function allPuzzles(){return Object.entries(PUZZLES).flatMap(([cat,l])=>l.map(p=>({...p,cat})));}
+function poolFor(id){return id==="all"?allPuzzles():PUZZLES[id].map(p=>({...p,cat:id}));}
+function catName(id){const c=CATEGORIES.find(c=>c.id===id);return c?c.name:"Mixed";}
+
+/* answer matching — forgiving, but checks every alias before giving up */
+const NOISE=new Set(["the","a","an","of","and","in","on","is","it","to","ka","ke","ki","ek","aur"]);
+const norm=s=>String(s).toLowerCase().replace(/[‘’“”]/g,"'").replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
+const core=s=>norm(s).split(" ").filter(w=>w&&!NOISE.has(w)).join("");
+function lev(a,b){
+  if(a===b)return 0; const m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+  let prev=Array.from({length:n+1},(_,i)=>i),cur=new Array(n+1);
+  for(let i=1;i<=m;i++){cur[0]=i;
+    for(let j=1;j<=n;j++)cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    [prev,cur]=[cur,prev];}
+  return prev[n];
+}
+function check(guess,answers){
+  const g=core(guess); if(!g) return "no";
+  let warm=false;
+  for(const ans of answers){
+    const c=core(ans); if(!c) continue;
+    if(g===c) return "exact";
+    // short answers get NO typo forgiveness — one edit on "GOT" makes "Goa"
+    const tol=c.length<=4?0:c.length<=6?1:c.length<=12?2:3;
+    const d=lev(g,c);
+    if(d<=tol) return "exact";
+    if(c.length>=7&&(c.includes(g)||g.includes(c))&&Math.abs(c.length-g.length)<=4) return "exact";
+    // the "so close" nudge is only honest on longer answers — on a 3-letter
+    // alias, one edit away is a completely different word, not a typo
+    if(c.length>=5&&d<=tol+2) warm=true;
+    if(c.length>=7&&(c.startsWith(g)||g.startsWith(c))&&g.length>=Math.ceil(c.length*0.6)) warm=true;
+  }
+  return warm?"close":"no";
+}
+
+/* build a round, optionally ramped easy → hard */
+function buildDeck(catId,n,ramp){
+  const pool=shuffle(poolFor(catId));
+  let deck=pool.slice(0,Math.min(n,pool.length));
+  if(ramp) deck.sort((a,b)=>a.d-b.d);
+  return deck;
+}
+
+/* theme */
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme",t);
+  store.set("emojiddle_theme",t);
+  $("themeBtn").textContent = t==="dark" ? "🌗" : "☀️";
+}
+function toggleTheme(){
+  applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+}
+
+/* sound — short synthesised tones, no files */
+let soundOn = store.get("emojiddle_sound","1")==="1";
+let actx=null;
+function beep(freqs,dur=0.16,type="sine"){
+  if(!soundOn) return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    freqs.forEach((f,i)=>{
+      const o=actx.createOscillator(),g=actx.createGain();
+      o.type=type; o.frequency.value=f;
+      const t0=actx.currentTime+i*dur*0.75;
+      g.gain.setValueAtTime(0.0001,t0);
+      g.gain.exponentialRampToValueAtTime(0.16,t0+0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+      o.connect(g); g.connect(actx.destination); o.start(t0); o.stop(t0+dur+0.02);
+    });
+  }catch(e){}
+}
+function toggleSound(){
+  soundOn=!soundOn; store.set("emojiddle_sound",soundOn?"1":"0");
+  $("soundBtn").textContent=soundOn?"🔊":"🔇";
+  if(soundOn) beep([660],0.1);
+}
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  $(id).classList.add("on");
+  const presenting = id==="host";
+  document.body.classList.toggle("presenting",presenting);
+  $("topbar").style.display = presenting ? "none" : "";
+  $("foot").style.display = presenting ? "none" : "";
+  window.scrollTo({top:0});
+}
+function goHome(){ stopTimer(); show("home"); }
+
+/* =====================================================================
+   HOST MODE
+   ===================================================================== */
+const TEAM_COLORS=["#ffc857","#4ade9b","#a97bff","#ff6b8b","#4cc9f0","#ff9f45"];
+const POINTS={1:10,2:20,3:30};
+
+let teams=[], hCat="all", hLen=12, hTime=30, hRamp=true;
+let hDeck=[], hIdx=0, hRevealed=false, hAwarded=null, tInt=null, tLeft=0;
+
+function defaultTeams(){
+  return [{name:"Team 1",score:0,wins:0},{name:"Team 2",score:0,wins:0}];
+}
+function renderTeamInputs(){
+  const box=$("teamList"); box.innerHTML="";
+  teams.forEach((t,i)=>{
+    const row=document.createElement("div"); row.className="teamrow";
+    row.innerHTML=`<span class="dot" style="background:${TEAM_COLORS[i]}"></span>
+      <input value="${t.name.replace(/"/g,'&quot;')}" maxlength="18" data-i="${i}" placeholder="Team name">
+      ${teams.length>2?`<button class="rm" data-rm="${i}" title="Remove">×</button>`:""}`;
+    box.appendChild(row);
+  });
+  box.querySelectorAll("input").forEach(inp=>{
+    inp.oninput=e=>{ teams[+e.target.dataset.i].name=e.target.value; };
+  });
+  box.querySelectorAll("[data-rm]").forEach(b=>{
+    b.onclick=e=>{ teams.splice(+e.currentTarget.dataset.rm,1); renderTeamInputs(); };
+  });
+  $("addTeam").disabled = teams.length>=6;
+}
+function addTeam(){
+  if(teams.length>=6) return;
+  teams.push({name:"Team "+(teams.length+1),score:0,wins:0});
+  renderTeamInputs();
+}
+
+function optionRow(el,items,current,onPick){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const b=document.createElement("button");
+    b.className="opt"+(it.v===current?" sel":"");
+    b.textContent=it.l;
+    b.onclick=()=>{ onPick(it.v); optionRow(el,items,it.v,onPick); };
+    el.appendChild(b);
+  });
+}
+function buildSetup(){
+  if(!teams.length) teams=defaultTeams();
+  renderTeamInputs();
+  optionRow($("catOpts"),
+    [{l:"🎲 Mixed",v:"all"},...CATEGORIES.map(c=>({l:c.icon+" "+c.name,v:c.id}))],
+    hCat, v=>hCat=v);
+  optionRow($("lenOpts"),[{l:"8",v:8},{l:"12",v:12},{l:"16",v:16},{l:"20",v:20}],hLen,v=>hLen=v);
+  optionRow($("timeOpts"),[{l:"Off",v:0},{l:"20s",v:20},{l:"30s",v:30},{l:"45s",v:45},{l:"60s",v:60}],hTime,v=>hTime=v);
+  optionRow($("rampOpts"),[{l:"Ramp on",v:true},{l:"Fully random",v:false}],hRamp,v=>hRamp=v);
+}
+
+function startHost(){
+  teams.forEach((t,i)=>{ t.score=0; t.wins=0; if(!t.name.trim()) t.name="Team "+(i+1); });
+  hDeck=buildDeck(hCat,hLen,hRamp);
+  hIdx=0;
+  if(document.documentElement.getAttribute("data-theme")==="dark" && !store.get("emojiddle_themeTouched",""))
+    applyTheme("light");           // projector-friendly by default the first time
+  show("host");
+  renderTeams();
+  loadHost();
+}
+function rematch(){ startHost(); }
+function quitHost(){ stopTimer(); show("setup"); }
+
+function renderTeams(){
+  const box=$("hTeams");
+  box.style.gridTemplateColumns=`repeat(${Math.min(teams.length,6)},1fr)`;
+  box.innerHTML=teams.map((t,i)=>`
+    <button class="team" data-t="${i}" style="border-color:${TEAM_COLORS[i]}33">
+      <div class="nm" style="color:${TEAM_COLORS[i]}">${escapeHtml(t.name)}</div>
+      <div class="sc">${t.score}</div>
+      <div class="key">press ${i+1}</div>
+    </button>`).join("");
+  box.querySelectorAll("[data-t]").forEach(b=>{
+    b.onclick=()=>award(+b.dataset.t);
+  });
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function loadHost(){
+  const p=hDeck[hIdx];
+  hRevealed=false; hAwarded=null;
+  $("hCat").textContent=catName(p.cat);
+  $("hDiff").innerHTML=[1,2,3].map(n=>`<i class="${n<=p.d?"on":""}"></i>`).join("");
+  $("hDiff").title=["","Easy","Medium","Hard"][p.d]+" · "+POINTS[p.d]+" points";
+  $("hCount").textContent=`${hIdx+1} / ${hDeck.length}`;
+  $("hEmoji").textContent=emo(p.e);
+  paint($("hEmoji"));
+  const wordShape=p.a[0].split(" ").map(w=>"•".repeat(w.length)).join("   ");
+  $("hReveal").innerHTML=`<div class="hidden-answer">${wordShape}</div>
+    <div class="answer-note">${p.a[0].split(" ").length} word${p.a[0].split(" ").length>1?"s":""} · worth ${POINTS[p.d]} points</div>`;
+  $("btnReveal").disabled=false;
+  $("btnNext").textContent = hIdx===hDeck.length-1 ? "Finish →" : "Next puzzle →";
+  startTimer();
+}
+
+function startTimer(){
+  stopTimer();
+  $("tbar").classList.remove("up");
+  if(!hTime){ $("tfill").style.width="100%"; return; }
+  tLeft=hTime;
+  $("tfill").style.transition="none";
+  $("tfill").style.width="100%";
+  requestAnimationFrame(()=>{ $("tfill").style.transition="width 1s linear"; });
+  tInt=setInterval(()=>{
+    tLeft--;
+    $("tfill").style.width=Math.max(0,tLeft/hTime*100)+"%";
+    if(tLeft===3) beep([520],0.09);
+    if(tLeft<=0){ stopTimer(); $("tbar").classList.add("up"); $("tfill").style.width="100%"; beep([300,240],0.2,"triangle"); }
+  },1000);
+}
+function stopTimer(){ if(tInt){clearInterval(tInt);tInt=null;} }
+
+function award(i){
+  if(hAwarded!==null || !teams[i]) return;
+  const p=hDeck[hIdx];
+  hAwarded=i;
+  teams[i].score+=POINTS[p.d];
+  teams[i].wins++;
+  stopTimer();
+  beep([784,1047],0.14);
+  renderTeams();
+  const card=document.querySelector(`[data-t="${i}"]`);
+  if(card){ card.classList.add("won"); card.style.borderColor=TEAM_COLORS[i]; }
+  revealAnswer(false);
+}
+
+function revealAnswer(nobody){
+  const p=hDeck[hIdx];
+  if(hRevealed) return;
+  hRevealed=true; stopTimer();
+  if(nobody) beep([330,262],0.18,"triangle");
+  const who = hAwarded!==null
+    ? `<div class="answer-note" style="color:${TEAM_COLORS[hAwarded]}">+${POINTS[p.d]} to ${escapeHtml(teams[hAwarded].name)}</div>`
+    : `<div class="answer-note">No points this round</div>`;
+  $("hReveal").innerHTML=`<div class="answer-big">${escapeHtml(p.a[0])}</div>
+    <div class="answer-note">${escapeHtml(p.h)}</div>${who}`;
+  $("btnReveal").disabled=true;
+}
+
+function nextHost(){
+  if(!hRevealed){ revealAnswer(true); return; }   // never skip past an unrevealed answer
+  hIdx++;
+  if(hIdx>=hDeck.length) return finishHost();
+  loadHost();
+}
+
+function finishHost(){
+  stopTimer();
+  const ranked=[...teams].map((t,i)=>({...t,i})).sort((a,b)=>b.score-a.score);
+  const top=ranked[0], tie=ranked.filter(t=>t.score===top.score).length>1;
+  $("hMedal").textContent = tie?"🤝":"🏆";
+  $("hWinner").textContent = tie
+    ? "It's a tie — " + ranked.filter(t=>t.score===top.score).map(t=>t.name).join(" & ")
+    : escapeHtml(top.name)+" wins";
+  $("hSub").textContent = `${hDeck.length} puzzles · ${catName(hCat)} · ${ranked.reduce((s,t)=>s+t.wins,0)} solved in the room`;
+  $("hStandings").innerHTML=ranked.map((t,r)=>`
+    <div class="srow ${r===0&&!tie?"first":""}">
+      <span class="rank">${r+1}</span>
+      <span class="nm" style="color:${TEAM_COLORS[t.i]}">${escapeHtml(t.name)}</span>
+      <span class="won">${t.wins} puzzle${t.wins===1?"":"s"}</span>
+      <span class="sc">${t.score}</span>
+    </div>`).join("");
+  paint($("hMedal"));
+  beep([523,659,784],0.18);
+  show("hostOver");
+}
+
+/* host keyboard — only while the host screen is up */
+document.addEventListener("keydown",e=>{
+  if(!$("host").classList.contains("on")) return;
+  if(e.target.tagName==="INPUT") return;
+  const k=e.key.toLowerCase();
+  if(k>="1"&&k<="6"){ e.preventDefault(); award(parseInt(k,10)-1); }
+  else if(k==="r"){ e.preventDefault(); revealAnswer(true); }
+  else if(k===" "||k==="enter"){ e.preventDefault(); nextHost(); }
+  else if(k==="t"){ e.preventDefault(); store.set("emojiddle_themeTouched","1"); toggleTheme(); }
+  else if(k==="escape"){ e.preventDefault(); quitHost(); }
+});
+
+/* =====================================================================
+   SOLO MODE
+   ===================================================================== */
+const ROUND=10, LIVES=3, DECAY=[100,70,45], LETTER_COST=15, CLUE_COST=25, STREAK_BONUS=10;
+let sCat="all", sDeck=[], sIdx=0, sScore=0, sStreak=0, sBestStreak=0, sSolved=0;
+let sLives=LIVES, sRevealed=new Set(), sClue=false, sLog=[], sLocked=false;
+
+function soloSetup(){
+  optionRow($("soloCats"),
+    [{l:"🎲 Mixed",v:"all"},...CATEGORIES.map(c=>({l:c.icon+" "+c.name,v:c.id}))],
+    sCat,v=>sCat=v);
+  show("soloPick");
+}
+function startSolo(){
+  sDeck=buildDeck(sCat,ROUND,true);
+  sIdx=0;sScore=0;sStreak=0;sBestStreak=0;sSolved=0;sLog=[];
+  show("solo"); loadSolo();
+}
+function loadSolo(){
+  const p=sDeck[sIdx];
+  sLocked=false;sRevealed=new Set();sClue=false;sLives=LIVES;
+  $("sChip").textContent=catName(p.cat)+" · "+["","Easy","Medium","Hard"][p.d];
+  $("sPuzzle").textContent=emo(p.e); paint($("sPuzzle"));
+  $("sClue").textContent="";
+  $("sVerdict").className="verdict"; $("sVerdict").innerHTML="";
+  $("sGuess").value=""; $("sGuess").disabled=false;
+  $("sSubmit").disabled=false; $("sSubmit").textContent="Guess"; $("sSubmit").onclick=submitGuess;
+  $("tLetter").disabled=false; $("tClue").disabled=false;
+  $("sCount").textContent=`${sIdx+1} / ${sDeck.length}`;
+  $("sFill").style.width=(sIdx/sDeck.length*100)+"%";
+  $("sLives").textContent=sLives;
+  drawBlanks(); $("sGuess").focus();
+}
+function drawBlanks(){
+  const ans=sDeck[sIdx].a[0]; let out="";
+  for(const ch of ans){
+    if(ch===" ") out+="   ";
+    else if(!/[a-zA-Z0-9]/.test(ch)) out+=ch;
+    else out+= sRevealed.has(ch.toLowerCase())?ch.toUpperCase():"_";
+  }
+  $("sBlanks").textContent=out;
+}
+function revealLetter(){
+  if(sLocked) return;
+  const left=[...new Set(sDeck[sIdx].a[0].toLowerCase().replace(/[^a-z]/g,""))].filter(c=>!sRevealed.has(c));
+  if(!left.length){$("tLetter").disabled=true;return;}
+  sRevealed.add(left[Math.floor(Math.random()*left.length)]);
+  drawBlanks();
+  if(left.length<=1)$("tLetter").disabled=true;
+  $("sGuess").focus();
+}
+function showClue(){
+  if(sLocked) return;
+  sClue=true; $("sClue").textContent="💡 "+sDeck[sIdx].h; $("tClue").disabled=true; $("sGuess").focus();
+}
+function pointsNow(){
+  const base=DECAY[LIVES-sLives]??DECAY[DECAY.length-1];
+  return Math.max(10, base - sRevealed.size*LETTER_COST - (sClue?CLUE_COST:0));
+}
+function submitGuess(){
+  if(sLocked) return;
+  const g=$("sGuess").value.trim(); if(!g) return;
+  const p=sDeck[sIdx], r=check(g,p.a);
+  if(r==="exact"){
+    const pts=pointsNow()+sStreak*STREAK_BONUS;
+    sScore+=pts;sSolved++;sStreak++;sBestStreak=Math.max(sBestStreak,sStreak);
+    sLog.push({e:p.e,a:p.a[0],ok:true,pts});
+    verdict("good",`✅ <b>${escapeHtml(p.a[0])}</b> — +${pts}${sStreak>1?` · ${sStreak} in a row 🔥`:""}`);
+    beep([784,1047],0.13); endSolo();
+  } else if(r==="close"){
+    verdict("warm","🔥 So close — check your spelling. That one's free.");
+    shakeStage();
+  } else {
+    sLives--; $("sLives").textContent=Math.max(0,sLives);
+    if(sLives<=0){
+      sStreak=0; sLog.push({e:p.e,a:p.a[0],ok:false,pts:0});
+      verdict("bad",`❌ Out of guesses. It was <b>${escapeHtml(p.a[0])}</b>.`);
+      beep([300,240],0.18,"triangle"); endSolo();
+    } else {
+      verdict("bad",`❌ Not it — ${sLives} guess${sLives===1?"":"es"} left. Next correct answer is worth less.`);
+      shakeStage();
+    }
+  }
+}
+function shakeStage(){ $("sStage").classList.add("shake"); setTimeout(()=>$("sStage").classList.remove("shake"),360); }
+function skipQ(){
+  if(sLocked) return;
+  const p=sDeck[sIdx]; sStreak=0;
+  sLog.push({e:p.e,a:p.a[0],ok:false,pts:0});
+  verdict("bad",`⏭ Skipped. It was <b>${escapeHtml(p.a[0])}</b>.`);
+  endSolo();
+}
+function verdict(kind,html){ const v=$("sVerdict"); v.className="verdict on "+kind; v.innerHTML=html; }
+function endSolo(){
+  sLocked=true;
+  sRevealed=new Set(sDeck[sIdx].a[0].toLowerCase().replace(/[^a-z]/g,""));
+  drawBlanks();
+  $("sGuess").disabled=true; $("tLetter").disabled=true; $("tClue").disabled=true;
+  $("sScore").textContent=sScore; $("sStreak").textContent=sStreak;
+  const last=sIdx===sDeck.length-1;
+  $("sSubmit").textContent=last?"See results":"Next →";
+  $("sSubmit").onclick=nextSolo; $("sSubmit").focus();
+}
+function nextSolo(){ sIdx++; if(sIdx>=sDeck.length) return finishSolo(); loadSolo(); }
+function finishSolo(){
+  $("sFill").style.width="100%";
+  const best=Math.max(Number(store.get("emojiddle_best",0)),sScore);
+  store.set("emojiddle_best",best);
+  const pct=sSolved/sDeck.length;
+  const [m,t,s]= pct===1?["🏆","Flawless","Every single one."]:
+    pct>=.8?["🥇","Emoji fluent","You'd host this well."]:
+    pct>=.5?["🥈","Solid round","Half of them fell."]:
+    pct>=.3?["🥉","Warming up","The clue button exists for a reason."]:
+            ["🌱","Rough one","Everyone starts here."];
+  $("oMedal").textContent=m; $("oTitle").textContent=t;
+  $("oSub").textContent=`${s} · ${sScore} points · ${sSolved}/${sDeck.length} solved · best streak ${sBestStreak} · personal best ${best}`;
+  $("oReview").innerHTML=sLog.map(l=>`
+    <div class="srow">
+      <span class="rank" style="font-family:var(--emoji);font-size:17px">${emo(l.e)}</span>
+      <span class="nm">${escapeHtml(l.a)}</span>
+      <span class="sc" style="font-size:17px">${l.ok?"+"+l.pts:"—"}</span>
+    </div>`).join("");
+  paint($("oReview")); paint($("oMedal"));
+  show("soloOver");
+}
+$("sGuess").addEventListener("keydown",e=>{ if(e.key==="Enter"){e.preventDefault();submitGuess();} });
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&sLocked&&$("solo").classList.contains("on")&&e.target.tagName!=="INPUT"){
+    e.preventDefault(); nextSolo();
+  }
+});
+
+/* =====================================================================
+   CUSTOM PACKS  —  paste from a spreadsheet, stored in this browser
+   ===================================================================== */
+const HAS_EMOJI=/\p{Extended_Pictographic}|\p{RI}/u;
+
+function loadPacks(){
+  try{ return JSON.parse(store.get("emojiddle_packs","[]"))||[]; }catch(e){ return []; }
+}
+function savePacks(p){ store.set("emojiddle_packs",JSON.stringify(p)); }
+
+/* rebuild the category list so packs appear everywhere the built-ins do */
+function refreshCategories(){
+  CATEGORIES=[...BUILTIN_CATEGORIES];
+  Object.keys(PUZZLES).forEach(k=>{ if(k.startsWith("pack_")) delete PUZZLES[k]; });
+  loadPacks().forEach(p=>{
+    if(!p.rows||!p.rows.length) return;
+    PUZZLES[p.id]=p.rows;
+    CATEGORIES.push({id:p.id,name:p.name,icon:p.icon||"✍️",custom:true});
+  });
+}
+
+/* Accepts tab-separated (what Excel and Sheets paste), or | separated, or comma. */
+function parsePack(text){
+  const rows=[], errors=[];
+  text.split(/\r?\n/).forEach((line,i)=>{
+    const raw=line.trim();
+    if(!raw || raw.startsWith("#")) return;
+    let parts = raw.includes("\t") ? raw.split("\t")
+              : raw.includes("|")  ? raw.split("|")
+              : raw.split(",");
+    parts=parts.map(s=>s.trim());
+    const [rawE,ans,note,diff]=parts;
+    // silently skip a header row
+    if(i===0 && /^emoji$/i.test(rawE||"")) return;
+    if(!rawE || !ans){ errors.push({line:i+1,text:raw,msg:"needs at least an emoji column and an answer"}); return; }
+    const e=rawE.replace(/\s+/g,"");
+    if(!HAS_EMOJI.test(e)){ errors.push({line:i+1,text:raw,msg:"first column has no emoji in it"}); return; }
+    const a=ans.split("/").map(s=>s.trim()).filter(Boolean);
+    if(!a.length){ errors.push({line:i+1,text:raw,msg:"answer is empty"}); return; }
+    let d=2;
+    if(diff){
+      const t=diff.toLowerCase();
+      d = (t.startsWith("e")||t==="1") ? 1 : (t.startsWith("h")||t==="3") ? 3 : 2;
+    }
+    rows.push({e,a,h:(note||"").trim(),d});
+  });
+  return {rows,errors};
+}
+
+function renderPreview(){
+  const {rows,errors}=parsePack($("packPaste").value);
+  const box=$("packPreview");
+  if(!rows.length && !errors.length){ box.innerHTML=""; return; }
+  const dl=["","Easy","Medium","Hard"];
+  box.innerHTML=`<div class="preview">
+    <div class="prow head"><span class="pe">Emoji</span><span class="pa">Answer</span>
+      <span class="pn">Note</span><span class="pd">Level</span></div>
+    ${rows.map(r=>`<div class="prow">
+      <span class="pe">${emo(r.e)}</span>
+      <span class="pa">${escapeHtml(r.a[0])}${r.a.length>1?` <span style="color:var(--muted);font-weight:400">+${r.a.length-1} alt</span>`:""}</span>
+      <span class="pn">${escapeHtml(r.h)||"<i>none</i>"}</span>
+      <span class="pd">${dl[r.d]}</span></div>`).join("")}
+    ${errors.map(e=>`<div class="prow err"><span class="pe">⚠️</span>
+      <span class="pa">Line ${e.line}</span><span class="pn">${escapeHtml(e.msg)}</span><span class="pd"></span></div>`).join("")}
+  </div>
+  <div class="note">${rows.length} puzzle${rows.length===1?"":"s"} ready${errors.length?` · ${errors.length} line${errors.length===1?"":"s"} skipped`:""}</div>`;
+  paint(box);
+}
+
+function savePack(){
+  const name=$("packName").value.trim();
+  const icon=$("packIcon").value.trim()||"✍️";
+  const {rows,errors}=parsePack($("packPaste").value);
+  if(!name){ alert("Give the pack a name first."); $("packName").focus(); return; }
+  if(rows.length<2){ alert("A pack needs at least 2 puzzles."+(errors.length?" Check the flagged lines below.":"")); return; }
+  const packs=loadPacks();
+  const existing=packs.findIndex(p=>p.name.toLowerCase()===name.toLowerCase());
+  const pack={id:existing>=0?packs[existing].id:"pack_"+Date.now().toString(36),name,icon,rows};
+  if(existing>=0) packs[existing]=pack; else packs.push(pack);
+  savePacks(packs);
+  refreshCategories(); buildSetup(); renderPacks(); buildCatSummary();
+  $("packName").value=""; $("packPaste").value=""; renderPreview();
+  beep([784,1047],0.13);
+  alert(`Saved "${name}" — ${rows.length} puzzles. It's now a category in Host and Solo.`);
+}
+
+function deletePack(id){
+  const packs=loadPacks(); const p=packs.find(x=>x.id===id);
+  if(!p || !confirm(`Delete "${p.name}"? This can't be undone.`)) return;
+  savePacks(packs.filter(x=>x.id!==id));
+  if(hCat===id) hCat="all";
+  if(sCat===id) sCat="all";
+  refreshCategories(); buildSetup(); renderPacks(); buildCatSummary();
+}
+
+function editPack(id){
+  const p=loadPacks().find(x=>x.id===id); if(!p) return;
+  $("packName").value=p.name; $("packIcon").value=p.icon||"✍️";
+  $("packPaste").value=packToText(p);
+  renderPreview();
+  $("packName").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function packToText(p){
+  return p.rows.map(r=>[r.e,r.a.join(" / "),r.h,["","easy","medium","hard"][r.d]].join("\t")).join("\n");
+}
+function copyPack(id){
+  const p=loadPacks().find(x=>x.id===id); if(!p) return;
+  const text=packToText(p);
+  const done=()=>alert(`"${p.name}" copied. Paste it into a spreadsheet, or into this box on another computer.`);
+  if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done,()=>fallbackCopy(text,done));
+  else fallbackCopy(text,done);
+}
+function fallbackCopy(text,done){
+  const ta=document.createElement("textarea");
+  ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); done(); }catch(e){ alert("Couldn't copy automatically — select the text manually."); }
+  document.body.removeChild(ta);
+}
+
+function renderPacks(){
+  const packs=loadPacks(), box=$("packList");
+  if(!packs.length){
+    box.innerHTML=`<div class="note">No packs yet. The best one you can make is about the people in the room — colleagues, departments, inside jokes. That's the round they'll talk about afterwards.</div>`;
+    return;
+  }
+  box.innerHTML=packs.map(p=>`
+    <div class="packcard">
+      <span class="ic">${p.icon||"✍️"}</span>
+      <span class="info"><b>${escapeHtml(p.name)}</b>
+        <small>${p.rows.length} puzzles · ${p.rows.filter(r=>r.d===1).length} easy / ${p.rows.filter(r=>r.d===2).length} med / ${p.rows.filter(r=>r.d===3).length} hard</small></span>
+      <button onclick="editPack('${p.id}')">Edit</button>
+      <button onclick="copyPack('${p.id}')">Copy out</button>
+      <button class="del" onclick="deletePack('${p.id}')">Delete</button>
+    </div>`).join("");
+  paint(box);
+}
+
+function loadSample(){
+  $("packIcon").value="🏢";
+  $("packName").value="Guess the Colleague";
+  $("packPaste").value=
+`# Replace these with your own. Tab, pipe or comma all work.
+🎩👓🧔	Rajesh from Finance	Never seen without the hat	easy
+☕☕☕💻	Priya from Design	Four coffees before noon	easy
+📊🔥😴	Quarterly Review	Four hours. Every quarter.	medium
+🚪🏃⏰5️⃣	Leaving at 5	A legend nobody has witnessed	medium
+🍰🎉🗓️	Friday Birthday Cake	The only reliable meeting	easy
+📧🌙2️⃣	The 2am Emailer	You know exactly who	hard`;
+  renderPreview();
+}
+
+function openPacks(){ renderPacks(); renderPreview(); show("packs"); }
+
+/* =====================================================================
+   BOOT
+   ===================================================================== */
+function buildCatSummary(){
+  const total=allPuzzles().length;
+  $("poolPill").innerHTML=`<b>${total}</b> puzzles`;
+  $("catSummary").innerHTML=CATEGORIES.map(c=>{
+    const l=PUZZLES[c.id]||[];
+    const e=l.filter(p=>p.d===1).length,md=l.filter(p=>p.d===2).length,h=l.filter(p=>p.d===3).length;
+    return `<div style="background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:12px${c.custom?";border-color:var(--gold)":""}">
+      <div style="font-family:var(--emoji);font-size:19px">${c.icon}</div>
+      <div style="font-weight:700;font-size:14px;margin-top:5px">${escapeHtml(c.name)}${c.custom?' <span style="color:var(--gold);font-size:10px">YOURS</span>':""}</div>
+      <div style="color:var(--muted);font-size:11.5px;margin-top:3px">${l.length} · ${e} easy / ${md} med / ${h} hard</div>
+    </div>`;
+  }).join("");
+  paint($("catSummary"));
+}
+
+function boot(){
+  applyTheme(store.get("emojiddle_theme","dark"));
+  $("soundBtn").textContent=soundOn?"🔊":"🔇";
+  document.title=APP_NAME+" — Emoji riddles for rooms";
+  refreshCategories();
+  buildCatSummary();
+  paint(document.querySelector(".demo")); paint(document.querySelector(".brand"));
+  document.querySelectorAll(".mode .ic").forEach(paint);
+  $("packPaste").addEventListener("input",renderPreview);
+  renderPacks();
+  teams=defaultTeams();
+  buildSetup();
+  document.addEventListener("keydown",e=>{
+    if(e.key.toLowerCase()==="t"&&!$("host").classList.contains("on")&&e.target.tagName!=="INPUT"){
+      store.set("emojiddle_themeTouched","1"); toggleTheme();
+    }
+  });
+}
+boot();
+</script>
+</body>
+</html>
