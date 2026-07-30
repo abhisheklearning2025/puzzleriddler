@@ -1,0 +1,108 @@
+{
+  "categories": [
+    { "slug": "phrases", "name": "Phrases & Idioms", "icon": "💬", "sortOrder": 0 },
+    { "slug": "words", "name": "One Word", "icon": "🔤", "sortOrder": 1 }
+  ],
+  "puzzles": {
+    "phrases": [
+      {
+        "a": ["I Understand", "Understand"],
+        "d": 1,
+        "h": "'I' sits under 'stand'.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "STAND" }, { "text": "I" }] }
+      },
+      {
+        "a": ["Split Second"],
+        "d": 1,
+        "h": "The word 'second', split down the middle.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "SEC" }, { "text": "OND" }] }
+      },
+      {
+        "a": ["High Chair", "Highchair"],
+        "d": 1,
+        "h": "'Chair', placed up high.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "CHAIR", "position": "top" }] }
+      },
+      {
+        "a": ["Backward Glance", "A Backward Glance"],
+        "d": 2,
+        "h": "The word 'glance', written backward.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "GLANCE", "transform": "reverse" }] }
+      },
+      {
+        "a": ["Mind Over Matter"],
+        "d": 2,
+        "h": "'Mind' over 'matter'.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "MIND" }, { "text": "MATTER" }] }
+      },
+      {
+        "a": ["Reading Between The Lines"],
+        "d": 2,
+        "h": "'Reading' sits between the lines.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "————————" }, { "text": "READING" }, { "text": "————————" }] }
+      },
+      {
+        "a": ["Beside Himself", "He's Beside Himself"],
+        "d": 2,
+        "h": "'He' standing beside 'he'.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "HE" }, { "text": "HE" }] }
+      },
+      {
+        "a": ["Circles Under The Eyes"],
+        "d": 2,
+        "h": "Circles, right under the 'eyes'.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "EYES" }, { "text": "◦ ◦ ◦" }] }
+      },
+      {
+        "a": ["Just Between You And Me"],
+        "d": 3,
+        "h": "'Just' sits between 'you' and 'me'.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "YOU" }, { "text": "JUST" }, { "text": "ME" }] }
+      },
+      {
+        "a": ["Three Degrees Below Zero"],
+        "d": 3,
+        "h": "Three degrees (°), below zero (0).",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "0" }, { "text": "° ° °" }] }
+      },
+      {
+        "a": ["Forgive And Forget"],
+        "d": 3,
+        "h": "For-give and for-get → 4 give & 4 get.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "4" }, { "text": "GIVE" }, { "text": "&" }, { "text": "4" }, { "text": "GET" }] }
+      }
+    ],
+    "words": [
+      {
+        "a": ["Repeat"],
+        "d": 1,
+        "h": "Two 'peat' → re-peat.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "PEAT" }, { "text": "PEAT" }] }
+      },
+      {
+        "a": ["Paradise"],
+        "d": 1,
+        "h": "A pair of 'dice' → para-dice.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "DICE" }, { "text": "DICE" }] }
+      },
+      {
+        "a": ["Tricycle"],
+        "d": 2,
+        "h": "Three 'cycle' → tri-cycle.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "CYCLE" }, { "text": "CYCLE" }, { "text": "CYCLE" }] }
+      },
+      {
+        "a": ["Downtown"],
+        "d": 2,
+        "h": "'Town', heading straight down.",
+        "content": { "style": { "arrangement": "stack" }, "layout": [{ "text": "TOWN", "transform": "vertical" }] }
+      },
+      {
+        "a": ["Scrambled Eggs"],
+        "d": 2,
+        "h": "The letters of 'eggs', scrambled.",
+        "content": { "style": { "arrangement": "row" }, "layout": [{ "text": "GGES" }] }
+      }
+    ]
+  }
+}

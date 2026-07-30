@@ -1,0 +1,87 @@
+// PuzzleRiddler — multi-game platform schema.
+// Shared puzzle fields are real columns (queried/validated identically across
+// games); the game-specific *visual* payload lives in the flexible `content`
+// JSON column, validated with Zod on every admin write.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Prisma 7: connection URLs live in prisma.config.ts, not here. The runtime
+// client connects via the Neon driver adapter (see lib/db.ts).
+datasource db {
+  provider = "postgresql"
+}
+
+enum GameKind {
+  EMOJI
+  DINGBATS
+}
+
+model Game {
+  id         String     @id @default(cuid())
+  slug       String     @unique // "emoji" | "dingbats"
+  name       String
+  tagline    String     @default("")
+  kind       GameKind // drives which renderer the client uses
+  isActive   Boolean    @default(true)
+  sortOrder  Int        @default(0)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  categories Category[]
+  puzzles    Puzzle[]
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  gameId    String
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  slug      String
+  name      String
+  icon      String   @default("")
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  puzzles   Puzzle[]
+
+  @@unique([gameId, slug]) // categories are namespaced per game
+  @@index([gameId])
+}
+
+model Puzzle {
+  id         String   @id @default(cuid())
+  gameId     String
+  game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  answers    String[] // accepted aliases (source `a` array)
+  note       String   @default("") // reveal note (source `h`)
+  difficulty Int      @default(2) // 1 easy | 2 medium | 3 hard (source `d`)
+  content    Json // { emoji } for EMOJI; { layout, style } for DINGBATS
+  isActive   Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([gameId, categoryId])
+  @@index([categoryId])
+}
+
+// Single-row settings table (always id = 1).
+model AdminSettings {
+  id              Int      @id @default(1)
+  cacheTtlSeconds Int      @default(86400) // 24h default
+  updatedAt       DateTime @updatedAt
+}
+
+// Pre-aggregated daily counters — one upsert-with-increment per event.
+// metric ∈ "visit" | "play" | "solve" | "reveal"; gameSlug "" for site-wide.
+model DailyStat {
+  day      DateTime @db.Date
+  metric   String
+  gameSlug String   @default("")
+  count    Int      @default(0)
+
+  @@id([day, metric, gameSlug])
+}

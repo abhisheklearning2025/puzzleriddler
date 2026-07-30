@@ -1,0 +1,2350 @@
+{
+  "categories": [
+    {
+      "slug": "bolly",
+      "name": "Bollywood",
+      "icon": "🎬",
+      "sortOrder": 0
+    },
+    {
+      "slug": "holly",
+      "name": "Hollywood",
+      "icon": "🍿",
+      "sortOrder": 1
+    },
+    {
+      "slug": "jargon",
+      "name": "Corporate Jargon",
+      "icon": "💼",
+      "sortOrder": 2
+    },
+    {
+      "slug": "people",
+      "name": "Famous People",
+      "icon": "🌟",
+      "sortOrder": 3
+    },
+    {
+      "slug": "places",
+      "name": "Places",
+      "icon": "🌍",
+      "sortOrder": 4
+    },
+    {
+      "slug": "food",
+      "name": "Food",
+      "icon": "🍲",
+      "sortOrder": 5
+    },
+    {
+      "slug": "idioms",
+      "name": "Idioms",
+      "icon": "💬",
+      "sortOrder": 6
+    },
+    {
+      "slug": "brands",
+      "name": "Brands",
+      "icon": "🏷️",
+      "sortOrder": 7
+    },
+    {
+      "slug": "cricket",
+      "name": "Cricket",
+      "icon": "🏏",
+      "sortOrder": 8
+    },
+    {
+      "slug": "nineties",
+      "name": "90s Nostalgia",
+      "icon": "📼",
+      "sortOrder": 9
+    },
+    {
+      "slug": "shows",
+      "name": "Shows & Series",
+      "icon": "📺",
+      "sortOrder": 10
+    },
+    {
+      "slug": "festivals",
+      "name": "Festivals",
+      "icon": "🪔",
+      "sortOrder": 11
+    },
+    {
+      "slug": "songs",
+      "name": "Hindi Songs",
+      "icon": "🎵",
+      "sortOrder": 12
+    }
+  ],
+  "puzzles": {
+    "bolly": [
+      {
+        "e": "🪙🔫🐴",
+        "a": [
+          "Sholay"
+        ],
+        "d": 1,
+        "h": "1975. Jai, Veeru, and a coin that always landed the same way."
+      },
+      {
+        "e": "3️⃣🤪🎓",
+        "a": [
+          "3 Idiots",
+          "Three Idiots"
+        ],
+        "d": 1,
+        "h": "Rancho, an engineering college, and 'All is well'."
+      },
+      {
+        "e": "❤️🤵👰🚂",
+        "a": [
+          "Dilwale Dulhania Le Jayenge",
+          "DDLJ"
+        ],
+        "d": 1,
+        "h": "Mustard fields and a hand reaching from a moving train."
+      },
+      {
+        "e": "🤼‍♀️🥇👨‍👧‍👧",
+        "a": [
+          "Dangal"
+        ],
+        "d": 1,
+        "h": "A father trains his daughters to wrestle for gold."
+      },
+      {
+        "e": "💪🏰🌊",
+        "a": [
+          "Baahubali",
+          "Bahubali"
+        ],
+        "d": 1,
+        "h": "'Kattappa ne … kyun mara?'"
+      },
+      {
+        "e": "💥🏍️🕶️",
+        "a": [
+          "Dhoom"
+        ],
+        "d": 1,
+        "h": "Bike-riding thieves versus ACP Jai Dixit."
+      },
+      {
+        "e": "😄😢🔁",
+        "a": [
+          "Kabhi Khushi Kabhie Gham",
+          "K3G"
+        ],
+        "d": 2,
+        "h": "Literally 'sometimes joy, sometimes sorrow'."
+      },
+      {
+        "e": "🕉️☮️🕉️",
+        "a": [
+          "Om Shanti Om"
+        ],
+        "d": 2,
+        "h": "Reincarnation, a burning studio, and 70s Bollywood."
+      },
+      {
+        "e": "🐒🧔👧🇵🇰",
+        "a": [
+          "Bajrangi Bhaijaan"
+        ],
+        "d": 2,
+        "h": "A Hanuman devotee walks a mute girl home across the border."
+      },
+      {
+        "e": "👽📻🎧",
+        "a": [
+          "PK"
+        ],
+        "d": 2,
+        "h": "An alien lands in Rajasthan and loses his remote."
+      },
+      {
+        "e": "🪂🇪🇸🐂",
+        "a": [
+          "Zindagi Na Milegi Dobara",
+          "ZNMD"
+        ],
+        "d": 2,
+        "h": "Three friends, a road trip through Spain, three fears."
+      },
+      {
+        "e": "🎤🏙️👦",
+        "a": [
+          "Gully Boy"
+        ],
+        "d": 2,
+        "h": "Rap out of the Mumbai chawls. 'Apna time aayega'."
+      },
+      {
+        "e": "🏏🇬🇧🌾",
+        "a": [
+          "Lagaan"
+        ],
+        "d": 2,
+        "h": "Villagers play cricket to escape a colonial tax."
+      },
+      {
+        "e": "⭐🌍🎨",
+        "a": [
+          "Taare Zameen Par"
+        ],
+        "d": 2,
+        "h": "A dyslexic boy and the art teacher who finally sees him."
+      },
+      {
+        "e": "🎨✊🇮🇳",
+        "a": [
+          "Rang De Basanti"
+        ],
+        "d": 2,
+        "h": "College friends re-enact freedom fighters, then live it."
+      },
+      {
+        "e": "❤️⏳🗽",
+        "a": [
+          "Kal Ho Naa Ho"
+        ],
+        "d": 2,
+        "h": "New York, a dying man, and the loveliest goodbye."
+      },
+      {
+        "e": "🏑👩‍🦰🇮🇳",
+        "a": [
+          "Chak De India",
+          "Chak De! India"
+        ],
+        "d": 2,
+        "h": "A disgraced captain coaches the women's hockey team."
+      },
+      {
+        "e": "🧠📸🔁",
+        "a": [
+          "Ghajini"
+        ],
+        "d": 2,
+        "h": "Short-term memory loss, tattoos, and Polaroids."
+      },
+      {
+        "e": "👻👗🚪",
+        "a": [
+          "Stree"
+        ],
+        "d": 2,
+        "h": "'O Stree, kal aana' — painted on every door in Chanderi."
+      },
+      {
+        "e": "👻💃🏰",
+        "a": [
+          "Bhool Bhulaiyaa"
+        ],
+        "d": 2,
+        "h": "Manjulika, a haveli, and Dr. Aditya Shrivastav."
+      },
+      {
+        "e": "🚰💪🇵🇰",
+        "a": [
+          "Gadar",
+          "Gadar Ek Prem Katha"
+        ],
+        "d": 2,
+        "h": "Sunny Deol, Partition, and one uprooted hand pump."
+      },
+      {
+        "e": "👽🌈🧒",
+        "a": [
+          "Koi Mil Gaya"
+        ],
+        "d": 2,
+        "h": "Jadoo the alien and a boy named Rohit."
+      },
+      {
+        "e": "📞💰😂",
+        "a": [
+          "Hera Pheri"
+        ],
+        "d": 2,
+        "h": "Wrong number, ransom money, Baburao's garage."
+      },
+      {
+        "e": "🍷💔🕯️",
+        "a": [
+          "Devdas"
+        ],
+        "d": 2,
+        "h": "Paro, Chandramukhi, and a bottle that never empties."
+      },
+      {
+        "e": "⏰👫🚆",
+        "a": [
+          "Jab We Met"
+        ],
+        "d": 2,
+        "h": "Geet misses her train and Aditya's life restarts."
+      },
+      {
+        "e": "🤗👨‍⚕️",
+        "a": [
+          "Munna Bhai MBBS",
+          "Munnabhai MBBS"
+        ],
+        "d": 2,
+        "h": "A goon fakes his way into medical college. Jaadu ki jhappi."
+      },
+      {
+        "e": "🎹🙈🐰",
+        "a": [
+          "Andhadhun"
+        ],
+        "d": 3,
+        "h": "A pianist pretending to be blind witnesses a murder."
+      },
+      {
+        "e": "📺👨‍👩‍👧🕳️",
+        "a": [
+          "Drishyam"
+        ],
+        "d": 3,
+        "h": "A cable-TV owner builds an alibi entirely out of movies."
+      },
+      {
+        "e": "👑🎒🇫🇷",
+        "a": [
+          "Queen"
+        ],
+        "d": 3,
+        "h": "A jilted bride goes on her honeymoon alone."
+      },
+      {
+        "e": "🚀🏡🇮🇳",
+        "a": [
+          "Swades"
+        ],
+        "d": 3,
+        "h": "A NASA engineer returns to his village and stays."
+      },
+      {
+        "e": "👑💃🕌",
+        "a": [
+          "Mughal-e-Azam"
+        ],
+        "d": 3,
+        "h": "Salim, Anarkali, and the wrath of Akbar."
+      },
+      {
+        "e": "⬛🙈🙉👩‍🏫",
+        "a": [
+          "Black"
+        ],
+        "d": 3,
+        "h": "A deaf-blind girl, her teacher, and the word 'water'."
+      },
+      {
+        "e": "🇮🇳❤️🇵🇰⚖️",
+        "a": [
+          "Veer Zaara",
+          "Veer-Zaara"
+        ],
+        "d": 3,
+        "h": "22 years in a Pakistani jail for a love across the border."
+      },
+      {
+        "e": "🤰🕵️‍♀️🚇",
+        "a": [
+          "Kahaani"
+        ],
+        "d": 3,
+        "h": "A pregnant woman searches Kolkata for a husband who may not exist."
+      },
+      {
+        "e": "🍬🙉🙊",
+        "a": [
+          "Barfi",
+          "Barfi!"
+        ],
+        "d": 3,
+        "h": "Darjeeling, silent comedy, and Jhilmil."
+      }
+    ],
+    "holly": [
+      {
+        "e": "🚢🧊💔",
+        "a": [
+          "Titanic"
+        ],
+        "d": 1,
+        "h": "'I'm the king of the world' — then the iceberg."
+      },
+      {
+        "e": "🦁👑🌅",
+        "a": [
+          "The Lion King",
+          "Lion King"
+        ],
+        "d": 1,
+        "h": "Simba, Mufasa, Pride Rock."
+      },
+      {
+        "e": "🦕🏝️🧬",
+        "a": [
+          "Jurassic Park"
+        ],
+        "d": 1,
+        "h": "Mosquito in amber, cloned dinosaurs, one island."
+      },
+      {
+        "e": "🔍🐠🌊",
+        "a": [
+          "Finding Nemo"
+        ],
+        "d": 1,
+        "h": "A clownfish dad crosses an ocean. Just keep swimming."
+      },
+      {
+        "e": "❄️👸⛄",
+        "a": [
+          "Frozen"
+        ],
+        "d": 1,
+        "h": "Elsa, Anna, and a snowman who dreams of summer."
+      },
+      {
+        "e": "🕷️🧑🕸️",
+        "a": [
+          "Spider-Man",
+          "Spiderman"
+        ],
+        "d": 1,
+        "h": "With great power comes great responsibility."
+      },
+      {
+        "e": "🧸🤠🚀",
+        "a": [
+          "Toy Story"
+        ],
+        "d": 1,
+        "h": "Woody, Buzz, 'to infinity and beyond'."
+      },
+      {
+        "e": "⭐⚔️🌌",
+        "a": [
+          "Star Wars"
+        ],
+        "d": 1,
+        "h": "A galaxy far, far away."
+      },
+      {
+        "e": "⚡🧙‍♂️🦉",
+        "a": [
+          "Harry Potter"
+        ],
+        "d": 1,
+        "h": "The boy who lived. Hogwarts. Hedwig."
+      },
+      {
+        "e": "🦸‍♂️🛡️🔨",
+        "a": [
+          "The Avengers",
+          "Avengers"
+        ],
+        "d": 1,
+        "h": "Earth's mightiest heroes assemble."
+      },
+      {
+        "e": "🏠😱👦",
+        "a": [
+          "Home Alone"
+        ],
+        "d": 1,
+        "h": "Kevin is forgotten at Christmas and books two burglars."
+      },
+      {
+        "e": "🏴‍☠️⚓🌴",
+        "a": [
+          "Pirates of the Caribbean"
+        ],
+        "d": 1,
+        "h": "Captain Jack Sparrow and the Black Pearl."
+      },
+      {
+        "e": "🌙🍌👨‍🦲",
+        "a": [
+          "Despicable Me"
+        ],
+        "d": 1,
+        "h": "Gru wants to steal the moon. Minions everywhere."
+      },
+      {
+        "e": "🥋🐼🥟",
+        "a": [
+          "Kung Fu Panda"
+        ],
+        "d": 1,
+        "h": "A noodle-shop panda becomes the Dragon Warrior."
+      },
+      {
+        "e": "🟢👹🧅🏰",
+        "a": [
+          "Shrek"
+        ],
+        "d": 1,
+        "h": "Ogres are like onions. They have layers."
+      },
+      {
+        "e": "🦾❤️🔴",
+        "a": [
+          "Iron Man"
+        ],
+        "d": 1,
+        "h": "Arc reactor, red and gold, Tony Stark."
+      },
+      {
+        "e": "🤵🇮🇹🐎",
+        "a": [
+          "The Godfather",
+          "Godfather"
+        ],
+        "d": 2,
+        "h": "An offer you can't refuse — and a horse in the bed."
+      },
+      {
+        "e": "💊🕶️🟩",
+        "a": [
+          "The Matrix",
+          "Matrix"
+        ],
+        "d": 2,
+        "h": "Red pill or blue pill. Green falling code."
+      },
+      {
+        "e": "🎈🏠👴",
+        "a": [
+          "Up"
+        ],
+        "d": 2,
+        "h": "Balloons carry a house toward Paradise Falls."
+      },
+      {
+        "e": "💤🌀🌃",
+        "a": [
+          "Inception"
+        ],
+        "d": 2,
+        "h": "A dream within a dream. The top keeps spinning."
+      },
+      {
+        "e": "🚀🌽🕳️",
+        "a": [
+          "Interstellar"
+        ],
+        "d": 2,
+        "h": "Corn blight, a wormhole, time bending near a black hole."
+      },
+      {
+        "e": "🦈🏖️🚤",
+        "a": [
+          "Jaws"
+        ],
+        "d": 2,
+        "h": "'You're gonna need a bigger boat.'"
+      },
+      {
+        "e": "🐀👨‍🍳🍲",
+        "a": [
+          "Ratatouille"
+        ],
+        "d": 2,
+        "h": "A Parisian rat cooks under a chef's hat. Anyone can cook."
+      },
+      {
+        "e": "🏝️🏐✈️",
+        "a": [
+          "Cast Away",
+          "Castaway"
+        ],
+        "d": 2,
+        "h": "A FedEx man, a deserted island, and Wilson."
+      },
+      {
+        "e": "🏃‍♂️🍫🪶",
+        "a": [
+          "Forrest Gump"
+        ],
+        "d": 2,
+        "h": "Life is like a box of chocolates."
+      },
+      {
+        "e": "💀🎸🇲🇽",
+        "a": [
+          "Coco"
+        ],
+        "d": 2,
+        "h": "The Land of the Dead, a guitar, and 'Remember Me'."
+      },
+      {
+        "e": "🛶🐅🌊",
+        "a": [
+          "Life of Pi"
+        ],
+        "d": 2,
+        "h": "A boy shares a lifeboat with a tiger named Richard Parker."
+      },
+      {
+        "e": "🤖🌱🚀",
+        "a": [
+          "WALL-E",
+          "Wall E"
+        ],
+        "d": 2,
+        "h": "A lonely trash robot finds a seedling and follows EVE."
+      },
+      {
+        "e": "🎩🍫🏭",
+        "a": [
+          "Charlie and the Chocolate Factory"
+        ],
+        "d": 2,
+        "h": "Golden tickets and Willy Wonka."
+      },
+      {
+        "e": "🕰️🚗⚡",
+        "a": [
+          "Back to the Future"
+        ],
+        "d": 2,
+        "h": "A DeLorean, 88 mph, and 1955."
+      },
+      {
+        "e": "🌍🚀👩‍🚀",
+        "a": [
+          "Gravity"
+        ],
+        "d": 3,
+        "h": "Adrift after debris destroys the shuttle."
+      },
+      {
+        "e": "🐺🏙️💵",
+        "a": [
+          "The Wolf of Wall Street"
+        ],
+        "d": 3,
+        "h": "Jordan Belfort, penny stocks, spectacular excess."
+      }
+    ],
+    "jargon": [
+      {
+        "e": "🤿📊",
+        "a": [
+          "Deep Dive"
+        ],
+        "d": 1,
+        "h": "Say both pictures out loud. Means 'read the thing properly'."
+      },
+      {
+        "e": "📦💭",
+        "a": [
+          "Think Outside The Box"
+        ],
+        "d": 1,
+        "h": "Said by people who have never left the box."
+      },
+      {
+        "e": "🏓💬",
+        "a": [
+          "Ping Me"
+        ],
+        "d": 1,
+        "h": "Table tennis, then a message. 'Ping me' — the ancestor of 'hey, quick call?'"
+      },
+      {
+        "e": "💡🌩️",
+        "a": [
+          "Brainstorm",
+          "Brainstorming"
+        ],
+        "d": 1,
+        "h": "An idea plus a storm. Nobody has ever had one that worked."
+      },
+      {
+        "e": "📋✅",
+        "a": [
+          "Action Item"
+        ],
+        "d": 1,
+        "h": "The thing written down at the end of a meeting and never done."
+      },
+      {
+        "e": "🧊🗣️",
+        "a": [
+          "Ice Breaker",
+          "Icebreaker"
+        ],
+        "d": 1,
+        "h": "You're inside one right now."
+      },
+      {
+        "e": "🍎⬇️🌳",
+        "a": [
+          "Low Hanging Fruit"
+        ],
+        "d": 2,
+        "h": "The easy wins — grabbed first, celebrated loudest."
+      },
+      {
+        "e": "🔄📞",
+        "a": [
+          "Circle Back"
+        ],
+        "d": 2,
+        "h": "'Let's circle back on that' means we will never speak of it again."
+      },
+      {
+        "e": "⚡🤝",
+        "a": [
+          "Synergy"
+        ],
+        "d": 2,
+        "h": "Two things being worth more together. Usually said just before a merger."
+      },
+      {
+        "e": "📶🧠",
+        "a": [
+          "Bandwidth"
+        ],
+        "d": 2,
+        "h": "'I don't have the bandwidth' — a polite no."
+      },
+      {
+        "e": "⚾👋",
+        "a": [
+          "Touch Base"
+        ],
+        "d": 2,
+        "h": "Borrowed from baseball by people who have never played baseball."
+      },
+      {
+        "e": "🔌📴",
+        "a": [
+          "Take It Offline"
+        ],
+        "d": 2,
+        "h": "Said when two people start arguing on a 30-person call."
+      },
+      {
+        "e": "🎩🔄",
+        "a": [
+          "Wear Many Hats",
+          "Wearing Many Hats"
+        ],
+        "d": 2,
+        "h": "You are doing three jobs for one salary."
+      },
+      {
+        "e": "🚌👥⬇️",
+        "a": [
+          "Throw Under The Bus",
+          "Thrown Under The Bus"
+        ],
+        "d": 2,
+        "h": "Blaming a colleague, publicly, to save yourself."
+      },
+      {
+        "e": "🏃🎯▶️",
+        "a": [
+          "Hit The Ground Running"
+        ],
+        "d": 2,
+        "h": "Expected of every new joiner on day one."
+      },
+      {
+        "e": "🔢🏃",
+        "a": [
+          "Run The Numbers"
+        ],
+        "d": 2,
+        "h": "Check the maths before promising anything."
+      },
+      {
+        "e": "🐦👁️🗺️",
+        "a": [
+          "Birds Eye View",
+          "Bird's Eye View"
+        ],
+        "d": 2,
+        "h": "The high-level picture, minus every inconvenient detail."
+      },
+      {
+        "e": "🌊🔥",
+        "a": [
+          "Boil The Ocean"
+        ],
+        "d": 3,
+        "h": "Attempting something impossibly large. 'Let's not boil the ocean here.'"
+      },
+      {
+        "e": "🚩🎌",
+        "a": [
+          "Run It Up The Flagpole"
+        ],
+        "d": 3,
+        "h": "Float an idea and see who salutes it."
+      },
+      {
+        "e": "🧵📈",
+        "a": [
+          "Move The Needle"
+        ],
+        "d": 3,
+        "h": "Make a difference big enough to actually show up in the numbers."
+      },
+      {
+        "e": "🅿️💡",
+        "a": [
+          "Parking Lot",
+          "Park That"
+        ],
+        "d": 3,
+        "h": "Where good ideas go to be forgotten with dignity."
+      },
+      {
+        "e": "🎯🥅➡️",
+        "a": [
+          "Moving The Goalposts"
+        ],
+        "d": 3,
+        "h": "Changing the target after the work is done."
+      }
+    ],
+    "people": [
+      {
+        "e": "🍎🧲👨‍🔬",
+        "a": [
+          "Isaac Newton",
+          "Newton"
+        ],
+        "d": 1,
+        "h": "Gravity, three laws of motion, one falling fruit."
+      },
+      {
+        "e": "👓☮️🇮🇳",
+        "a": [
+          "Mahatma Gandhi",
+          "Gandhi",
+          "Mohandas Gandhi"
+        ],
+        "d": 1,
+        "h": "Round glasses, the salt march, non-violence."
+      },
+      {
+        "e": "🏏🇮🇳💯",
+        "a": [
+          "Sachin Tendulkar",
+          "Sachin"
+        ],
+        "d": 1,
+        "h": "The Little Master. 100 international centuries."
+      },
+      {
+        "e": "🚀🚗🐦",
+        "a": [
+          "Elon Musk"
+        ],
+        "d": 1,
+        "h": "Rockets, electric cars, and a bought bird app."
+      },
+      {
+        "e": "⚽🇦🇷🐐",
+        "a": [
+          "Lionel Messi",
+          "Messi"
+        ],
+        "d": 1,
+        "h": "Left foot, Barcelona, 2022 World Cup."
+      },
+      {
+        "e": "⚽🇵🇹💪",
+        "a": [
+          "Cristiano Ronaldo",
+          "Ronaldo"
+        ],
+        "d": 1,
+        "h": "SIUUU."
+      },
+      {
+        "e": "🧪⚛️🤯",
+        "a": [
+          "Albert Einstein",
+          "Einstein"
+        ],
+        "d": 1,
+        "h": "E = mc², relativity, and that hair."
+      },
+      {
+        "e": "🕺🧤🌙",
+        "a": [
+          "Michael Jackson",
+          "MJ"
+        ],
+        "d": 2,
+        "h": "One sequined glove and the moonwalk."
+      },
+      {
+        "e": "💻🪟💰",
+        "a": [
+          "Bill Gates"
+        ],
+        "d": 2,
+        "h": "Built a software giant, then gave the money away."
+      },
+      {
+        "e": "🍎📱🖤👕",
+        "a": [
+          "Steve Jobs"
+        ],
+        "d": 2,
+        "h": "Black turtleneck. 'One more thing…'"
+      },
+      {
+        "e": "🎨👂🌌",
+        "a": [
+          "Vincent van Gogh",
+          "Van Gogh"
+        ],
+        "d": 2,
+        "h": "Starry Night, sunflowers, and a missing ear."
+      },
+      {
+        "e": "🖼️😊🚁",
+        "a": [
+          "Leonardo da Vinci",
+          "Da Vinci"
+        ],
+        "d": 2,
+        "h": "The Mona Lisa and flying-machine sketches."
+      },
+      {
+        "e": "🥊🦋🐝",
+        "a": [
+          "Muhammad Ali",
+          "Ali"
+        ],
+        "d": 2,
+        "h": "'Float like a butterfly, sting like a bee.'"
+      },
+      {
+        "e": "🇿🇦✊🕊️",
+        "a": [
+          "Nelson Mandela",
+          "Mandela"
+        ],
+        "d": 2,
+        "h": "27 years in prison, then president."
+      },
+      {
+        "e": "💡🔦🔬",
+        "a": [
+          "Thomas Edison",
+          "Edison"
+        ],
+        "d": 2,
+        "h": "A thousand patents and a light bulb."
+      },
+      {
+        "e": "🚀🇮🇳📖",
+        "a": [
+          "APJ Abdul Kalam",
+          "Abdul Kalam",
+          "Kalam"
+        ],
+        "d": 2,
+        "h": "India's Missile Man, then President, then Wings of Fire."
+      },
+      {
+        "e": "🎭✍️🇬🇧",
+        "a": [
+          "William Shakespeare",
+          "Shakespeare"
+        ],
+        "d": 2,
+        "h": "Hamlet, Macbeth, and 154 sonnets."
+      },
+      {
+        "e": "📚👧🎓🇵🇰",
+        "a": [
+          "Malala Yousafzai",
+          "Malala"
+        ],
+        "d": 2,
+        "h": "Shot for going to school; youngest Nobel laureate."
+      },
+      {
+        "e": "👩‍🔬☢️🏅",
+        "a": [
+          "Marie Curie"
+        ],
+        "d": 3,
+        "h": "Radioactivity, polonium and radium, two Nobel prizes."
+      },
+      {
+        "e": "🧠♿🕳️",
+        "a": [
+          "Stephen Hawking",
+          "Hawking"
+        ],
+        "d": 3,
+        "h": "A Brief History of Time. Black holes."
+      },
+      {
+        "e": "🎤🇮🇳🕊️",
+        "a": [
+          "Lata Mangeshkar",
+          "Lata"
+        ],
+        "d": 3,
+        "h": "The Nightingale of India."
+      },
+      {
+        "e": "🧮🕉️♾️",
+        "a": [
+          "Srinivasa Ramanujan",
+          "Ramanujan"
+        ],
+        "d": 3,
+        "h": "Self-taught mathematician from Madras. 1729."
+      }
+    ],
+    "places": [
+      {
+        "e": "🗼🥐❤️",
+        "a": [
+          "Paris"
+        ],
+        "d": 1,
+        "h": "City of light, and an iron tower."
+      },
+      {
+        "e": "🗽🍎🌃",
+        "a": [
+          "New York",
+          "New York City",
+          "NYC"
+        ],
+        "d": 1,
+        "h": "The Big Apple."
+      },
+      {
+        "e": "🕌🤍💎",
+        "a": [
+          "Taj Mahal"
+        ],
+        "d": 1,
+        "h": "White marble on the Yamuna, Agra."
+      },
+      {
+        "e": "🍕🏛️🐺",
+        "a": [
+          "Rome"
+        ],
+        "d": 1,
+        "h": "The Colosseum — and a wolf that raised twins."
+      },
+      {
+        "e": "🐨🦘🏄",
+        "a": [
+          "Australia"
+        ],
+        "d": 1,
+        "h": "A continent, a country, and a very big reef."
+      },
+      {
+        "e": "🍣🗻🎌",
+        "a": [
+          "Japan"
+        ],
+        "d": 1,
+        "h": "Mount Fuji, bullet trains, cherry blossom."
+      },
+      {
+        "e": "🐫🏜️🔺",
+        "a": [
+          "Egypt"
+        ],
+        "d": 1,
+        "h": "Pyramids, the Nile, the Sphinx."
+      },
+      {
+        "e": "🐼🏯🥢",
+        "a": [
+          "China"
+        ],
+        "d": 1,
+        "h": "There's a rather long wall."
+      },
+      {
+        "e": "🍁🏒🦫",
+        "a": [
+          "Canada"
+        ],
+        "d": 1,
+        "h": "A red leaf on the flag."
+      },
+      {
+        "e": "⚽🌴🎉🌳",
+        "a": [
+          "Brazil"
+        ],
+        "d": 1,
+        "h": "Carnival, the Amazon, five World Cups."
+      },
+      {
+        "e": "🍺🚗🥨",
+        "a": [
+          "Germany"
+        ],
+        "d": 2,
+        "h": "Oktoberfest, autobahns, pretzels."
+      },
+      {
+        "e": "💃🐂🥘",
+        "a": [
+          "Spain"
+        ],
+        "d": 2,
+        "h": "Flamenco, bulls, paella."
+      },
+      {
+        "e": "🏔️🍫⌚",
+        "a": [
+          "Switzerland"
+        ],
+        "d": 2,
+        "h": "Alps, neutrality, and very precise timekeeping."
+      },
+      {
+        "e": "🌴🎬⭐",
+        "a": [
+          "Hollywood",
+          "Los Angeles",
+          "LA"
+        ],
+        "d": 2,
+        "h": "Big white letters on a hillside."
+      },
+      {
+        "e": "🏙️🐪💰",
+        "a": [
+          "Dubai"
+        ],
+        "d": 2,
+        "h": "The world's tallest building, on sand."
+      },
+      {
+        "e": "🏛️🏺🫒",
+        "a": [
+          "Greece"
+        ],
+        "d": 2,
+        "h": "The Parthenon and olive groves."
+      },
+      {
+        "e": "🌷🚲🧀",
+        "a": [
+          "Netherlands",
+          "Holland"
+        ],
+        "d": 2,
+        "h": "Tulips, canals, and more bikes than people."
+      },
+      {
+        "e": "🏖️🥥⛪",
+        "a": [
+          "Goa"
+        ],
+        "d": 2,
+        "h": "India's smallest state, beaches and Portuguese churches."
+      },
+      {
+        "e": "❄️🐧🧊",
+        "a": [
+          "Antarctica"
+        ],
+        "d": 2,
+        "h": "No countries, no permanent residents, plenty of ice."
+      },
+      {
+        "e": "🎡🍜🦁",
+        "a": [
+          "Singapore"
+        ],
+        "d": 3,
+        "h": "A city-state with a lion in its name and a merlion on its shore."
+      },
+      {
+        "e": "⛩️🍵🏯",
+        "a": [
+          "Kyoto"
+        ],
+        "d": 3,
+        "h": "Japan's old capital. Thousands of shrines."
+      },
+      {
+        "e": "🏔️🙏🚩",
+        "a": [
+          "Nepal"
+        ],
+        "d": 3,
+        "h": "Everest's home, and the only non-rectangular flag."
+      }
+    ],
+    "food": [
+      {
+        "e": "🍚🌶️🍗",
+        "a": [
+          "Biryani"
+        ],
+        "d": 1,
+        "h": "Layered rice and meat, sealed and slow-cooked."
+      },
+      {
+        "e": "☕🌿🥛",
+        "a": [
+          "Masala Chai",
+          "Chai"
+        ],
+        "d": 1,
+        "h": "Boiled tea with ginger, cardamom, and too much sugar."
+      },
+      {
+        "e": "🥟🍲🥢",
+        "a": [
+          "Momos",
+          "Momo"
+        ],
+        "d": 1,
+        "h": "Steamed Himalayan dumplings with fiery red chutney."
+      },
+      {
+        "e": "🧀🍰",
+        "a": [
+          "Cheesecake"
+        ],
+        "d": 1,
+        "h": "Two words, glued together, exactly as drawn."
+      },
+      {
+        "e": "🐟🍟🇬🇧",
+        "a": [
+          "Fish and Chips"
+        ],
+        "d": 1,
+        "h": "Newspaper, vinegar, seaside."
+      },
+      {
+        "e": "🍞🧄",
+        "a": [
+          "Garlic Bread"
+        ],
+        "d": 1,
+        "h": "Say the two pictures out loud."
+      },
+      {
+        "e": "🍜🥢🍥",
+        "a": [
+          "Ramen"
+        ],
+        "d": 1,
+        "h": "Broth, noodles, soft egg, a sheet of nori."
+      },
+      {
+        "e": "🥔🍔🌶️",
+        "a": [
+          "Vada Pav"
+        ],
+        "d": 2,
+        "h": "Mumbai's potato burger. Twenty rupees."
+      },
+      {
+        "e": "🧈🐓",
+        "a": [
+          "Butter Chicken",
+          "Murgh Makhani"
+        ],
+        "d": 2,
+        "h": "Read the two emoji literally, in order."
+      },
+      {
+        "e": "🥞🥔🥥",
+        "a": [
+          "Masala Dosa",
+          "Dosa"
+        ],
+        "d": 2,
+        "h": "Fermented rice crepe, potato filling, coconut chutney."
+      },
+      {
+        "e": "🍮🌀🍯",
+        "a": [
+          "Jalebi"
+        ],
+        "d": 2,
+        "h": "Deep-fried spirals drowned in syrup."
+      },
+      {
+        "e": "🍦🥪",
+        "a": [
+          "Ice Cream Sandwich"
+        ],
+        "d": 2,
+        "h": "Both pictures, one after the other."
+      },
+      {
+        "e": "🥣🍅🌶️🫓",
+        "a": [
+          "Pav Bhaji"
+        ],
+        "d": 2,
+        "h": "Mashed vegetable curry with buttered buns."
+      },
+      {
+        "e": "🥩🔥🍢",
+        "a": [
+          "Kebab",
+          "Seekh Kebab"
+        ],
+        "d": 2,
+        "h": "Spiced minced meat on a skewer over coals."
+      },
+      {
+        "e": "🥤🍋🧂",
+        "a": [
+          "Nimbu Pani",
+          "Shikanji",
+          "Lemonade"
+        ],
+        "d": 2,
+        "h": "Lemon, water, salt, sugar. Summer in a glass."
+      },
+      {
+        "e": "🫓🧈🔥",
+        "a": [
+          "Butter Naan",
+          "Naan"
+        ],
+        "d": 2,
+        "h": "Tandoor flatbread, brushed while hot."
+      },
+      {
+        "e": "🥥🍛🐟",
+        "a": [
+          "Fish Curry"
+        ],
+        "d": 2,
+        "h": "Coconut, tamarind, and the day's catch."
+      },
+      {
+        "e": "🍚🥛🍬🌰",
+        "a": [
+          "Kheer",
+          "Rice Pudding"
+        ],
+        "d": 2,
+        "h": "Milk, rice, cardamom. The default Indian dessert."
+      },
+      {
+        "e": "🌙🥖🇫🇷",
+        "a": [
+          "Croissant"
+        ],
+        "d": 2,
+        "h": "Crescent-shaped, and the French word says so."
+      },
+      {
+        "e": "🌹🫐🍯",
+        "a": [
+          "Gulab Jamun"
+        ],
+        "d": 3,
+        "h": "'Gulab' means rose. 'Jamun' is a dark berry. Fried dough in rose syrup."
+      },
+      {
+        "e": "🍦🍧🥭",
+        "a": [
+          "Kulfi"
+        ],
+        "d": 3,
+        "h": "Dense frozen milk on a stick — no churning, so it never goes soft."
+      },
+      {
+        "e": "🧆🫓🥗",
+        "a": [
+          "Falafel"
+        ],
+        "d": 3,
+        "h": "Fried chickpea balls in pita with tahini."
+      }
+    ],
+    "idioms": [
+      {
+        "e": "🎂🍰😌",
+        "a": [
+          "Piece of cake",
+          "A piece of cake"
+        ],
+        "d": 1,
+        "h": "Something very easy."
+      },
+      {
+        "e": "🌧️🐱🐶",
+        "a": [
+          "Raining cats and dogs",
+          "It's raining cats and dogs"
+        ],
+        "d": 1,
+        "h": "Very heavy rain."
+      },
+      {
+        "e": "🧊💔🤝",
+        "a": [
+          "Break the ice",
+          "Breaking the ice"
+        ],
+        "d": 1,
+        "h": "Easing the awkwardness when strangers meet. Rather on the nose today."
+      },
+      {
+        "e": "💰🌳❌",
+        "a": [
+          "Money doesn't grow on trees"
+        ],
+        "d": 1,
+        "h": "What every parent eventually says."
+      },
+      {
+        "e": "🌙💙1️⃣",
+        "a": [
+          "Once in a blue moon"
+        ],
+        "d": 1,
+        "h": "Very rarely."
+      },
+      {
+        "e": "📚🖼️🙅",
+        "a": [
+          "Don't judge a book by its cover"
+        ],
+        "d": 1,
+        "h": "Appearances mislead."
+      },
+      {
+        "e": "🐱🎒🚪",
+        "a": [
+          "Let the cat out of the bag",
+          "Cat out of the bag"
+        ],
+        "d": 2,
+        "h": "To accidentally give away a secret."
+      },
+      {
+        "e": "🐦🐦🪨",
+        "a": [
+          "Kill two birds with one stone",
+          "Two birds one stone"
+        ],
+        "d": 2,
+        "h": "Solve two problems with one action."
+      },
+      {
+        "e": "⏰🐦🐛",
+        "a": [
+          "The early bird catches the worm",
+          "Early bird catches the worm"
+        ],
+        "d": 2,
+        "h": "Get there first and you win."
+      },
+      {
+        "e": "🥛😭❌",
+        "a": [
+          "Don't cry over spilled milk",
+          "Crying over spilled milk"
+        ],
+        "d": 2,
+        "h": "No use regretting what can't be undone."
+      },
+      {
+        "e": "🎯🔨🔩",
+        "a": [
+          "Hit the nail on the head"
+        ],
+        "d": 2,
+        "h": "To be exactly right."
+      },
+      {
+        "e": "🐘🚪🛋️",
+        "a": [
+          "Elephant in the room",
+          "The elephant in the room"
+        ],
+        "d": 2,
+        "h": "The obvious problem nobody will mention."
+      },
+      {
+        "e": "🧺🥚🥚",
+        "a": [
+          "Don't put all your eggs in one basket"
+        ],
+        "d": 2,
+        "h": "Spread the risk."
+      },
+      {
+        "e": "✂️🏃💨",
+        "a": [
+          "Cut to the chase"
+        ],
+        "d": 2,
+        "h": "Skip the preamble. Get to the point."
+      },
+      {
+        "e": "🐍🌿👀",
+        "a": [
+          "Snake in the grass",
+          "A snake in the grass"
+        ],
+        "d": 2,
+        "h": "A hidden, treacherous person."
+      },
+      {
+        "e": "🥔🔥🤲",
+        "a": [
+          "Hot potato",
+          "A hot potato"
+        ],
+        "d": 2,
+        "h": "A topic nobody wants to hold on to."
+      },
+      {
+        "e": "🐟🌊🌊",
+        "a": [
+          "Plenty of fish in the sea",
+          "There are plenty of fish in the sea"
+        ],
+        "d": 2,
+        "h": "Said after every break-up."
+      },
+      {
+        "e": "⛈️🌈☀️",
+        "a": [
+          "Every cloud has a silver lining"
+        ],
+        "d": 2,
+        "h": "Bad situations still hide something good."
+      },
+      {
+        "e": "🔥🎮⚠️",
+        "a": [
+          "Playing with fire",
+          "Don't play with fire"
+        ],
+        "d": 2,
+        "h": "Taking a dangerous risk."
+      },
+      {
+        "e": "🍳🥚🧺",
+        "a": [
+          "Don't count your chickens before they hatch"
+        ],
+        "d": 2,
+        "h": "Don't assume success too early."
+      },
+      {
+        "e": "🐦✋🌳🐦🐦",
+        "a": [
+          "A bird in the hand is worth two in the bush",
+          "Bird in the hand"
+        ],
+        "d": 3,
+        "h": "What you have beats what you might get."
+      },
+      {
+        "e": "👂🧱",
+        "a": [
+          "Walls have ears",
+          "The walls have ears"
+        ],
+        "d": 3,
+        "h": "Careful — you may be overheard."
+      }
+    ],
+    "brands": [
+      {
+        "e": "🍎🖤📱",
+        "a": [
+          "Apple"
+        ],
+        "d": 1,
+        "h": "Cupertino. A bitten fruit."
+      },
+      {
+        "e": "🎥🍿🔴",
+        "a": [
+          "Netflix"
+        ],
+        "d": 1,
+        "h": "'Are you still watching?'"
+      },
+      {
+        "e": "☕🧜‍♀️🟢",
+        "a": [
+          "Starbucks"
+        ],
+        "d": 1,
+        "h": "Green siren, misspelt names on cups."
+      },
+      {
+        "e": "🍔🤡🟨",
+        "a": [
+          "McDonald's",
+          "McDonalds"
+        ],
+        "d": 1,
+        "h": "Golden arches."
+      },
+      {
+        "e": "🥤🔴⚪🎅",
+        "a": [
+          "Coca Cola",
+          "Coca-Cola",
+          "Coke"
+        ],
+        "d": 1,
+        "h": "Atlanta, 1886. Red cans, and a red Santa they helped popularise."
+      },
+      {
+        "e": "✔️👟🏃",
+        "a": [
+          "Nike"
+        ],
+        "d": 1,
+        "h": "Just do it. Named after a Greek goddess."
+      },
+      {
+        "e": "📦😊➡️",
+        "a": [
+          "Amazon"
+        ],
+        "d": 1,
+        "h": "An arrow pointing from A to Z."
+      },
+      {
+        "e": "🚗⚡🔋",
+        "a": [
+          "Tesla"
+        ],
+        "d": 1,
+        "h": "Named after an inventor, run by a memer."
+      },
+      {
+        "e": "📸🌈🖼️",
+        "a": [
+          "Instagram"
+        ],
+        "d": 1,
+        "h": "Squares, filters, then Stories."
+      },
+      {
+        "e": "👻💬🟨",
+        "a": [
+          "Snapchat"
+        ],
+        "d": 1,
+        "h": "Messages that disappear."
+      },
+      {
+        "e": "🎵📱🕺",
+        "a": [
+          "TikTok",
+          "Tik Tok"
+        ],
+        "d": 1,
+        "h": "Short vertical video, infinite scroll."
+      },
+      {
+        "e": "🎬🎢🐭",
+        "a": [
+          "Disney"
+        ],
+        "d": 1,
+        "h": "A mouse built a castle."
+      },
+      {
+        "e": "🚕📱🖤",
+        "a": [
+          "Uber"
+        ],
+        "d": 1,
+        "h": "Tap a button, get a ride."
+      },
+      {
+        "e": "🎧🎵🟢",
+        "a": [
+          "Spotify"
+        ],
+        "d": 1,
+        "h": "Green, Swedish, wrapped every December."
+      },
+      {
+        "e": "🐦💬🔵",
+        "a": [
+          "Twitter",
+          "X"
+        ],
+        "d": 1,
+        "h": "280 characters, then a rebrand to a single letter."
+      },
+      {
+        "e": "🔍🌈🔤",
+        "a": [
+          "Google"
+        ],
+        "d": 2,
+        "h": "Named after a misspelt very large number."
+      },
+      {
+        "e": "🪟💻🏢",
+        "a": [
+          "Microsoft"
+        ],
+        "d": 2,
+        "h": "Redmond. Four coloured panes."
+      },
+      {
+        "e": "🍄🎮🔴",
+        "a": [
+          "Nintendo"
+        ],
+        "d": 2,
+        "h": "Mario, Zelda, and the Switch."
+      },
+      {
+        "e": "🏨🛏️🌍",
+        "a": [
+          "Airbnb"
+        ],
+        "d": 2,
+        "h": "Stay in somebody else's house."
+      },
+      {
+        "e": "🛒🇮🇳📦",
+        "a": [
+          "Flipkart"
+        ],
+        "d": 2,
+        "h": "India's home-grown e-commerce, out of Bengaluru."
+      },
+      {
+        "e": "📶📱🇮🇳🆓",
+        "a": [
+          "Jio",
+          "Reliance Jio"
+        ],
+        "d": 2,
+        "h": "Free data in 2016 rewired the Indian internet."
+      },
+      {
+        "e": "🍫🟣🥛",
+        "a": [
+          "Cadbury",
+          "Dairy Milk"
+        ],
+        "d": 2,
+        "h": "Purple wrapper. A glass and a half."
+      }
+    ],
+    "cricket": [
+      {
+        "e": "👑🏏🇮🇳",
+        "a": [
+          "Virat Kohli",
+          "Kohli"
+        ],
+        "d": 1,
+        "h": "Chase master. The aggression, the celebration."
+      },
+      {
+        "e": "❄️🧢🏏",
+        "a": [
+          "MS Dhoni",
+          "Dhoni",
+          "Mahendra Singh Dhoni"
+        ],
+        "d": 1,
+        "h": "Captain Cool. The helicopter shot, the 2011 final six."
+      },
+      {
+        "e": "🎳🏏",
+        "a": [
+          "Bowled"
+        ],
+        "d": 1,
+        "h": "Stumps everywhere. The most satisfying dismissal."
+      },
+      {
+        "e": "6️⃣🏏🎉",
+        "a": [
+          "Sixer",
+          "Six"
+        ],
+        "d": 1,
+        "h": "Over the ropes, no bounce."
+      },
+      {
+        "e": "🏆🇮🇳2️⃣0️⃣1️⃣1️⃣",
+        "a": [
+          "2011 World Cup",
+          "World Cup 2011"
+        ],
+        "d": 1,
+        "h": "Wankhede. Dhoni finishes it in style."
+      },
+      {
+        "e": "🦆0️⃣🏏",
+        "a": [
+          "Duck",
+          "Out for a duck"
+        ],
+        "d": 2,
+        "h": "Dismissed without scoring. The bird comes from the shape of the zero."
+      },
+      {
+        "e": "🎩🏏3️⃣",
+        "a": [
+          "Hat Trick",
+          "Hat-trick"
+        ],
+        "d": 2,
+        "h": "Three wickets in three balls."
+      },
+      {
+        "e": "🦵⬅️🎯",
+        "a": [
+          "LBW",
+          "Leg Before Wicket"
+        ],
+        "d": 2,
+        "h": "The pad got in the way of a ball heading for the stumps."
+      },
+      {
+        "e": "🏏🏃🏃❌",
+        "a": [
+          "Run Out"
+        ],
+        "d": 2,
+        "h": "The one dismissal where two people are to blame."
+      },
+      {
+        "e": "🌀🖐️🏏",
+        "a": [
+          "Spin Bowling",
+          "Spinner"
+        ],
+        "d": 2,
+        "h": "Slow, flighted, and far more dangerous than it looks."
+      },
+      {
+        "e": "🦁💛🏏",
+        "a": [
+          "Chennai Super Kings",
+          "CSK"
+        ],
+        "d": 2,
+        "h": "Yellow army, Chepauk, whistle podu."
+      },
+      {
+        "e": "💙🏏🌊",
+        "a": [
+          "Mumbai Indians",
+          "MI"
+        ],
+        "d": 2,
+        "h": "Five IPL titles and a Wankhede home crowd."
+      },
+      {
+        "e": "🇮🇳🏆1️⃣9️⃣8️⃣3️⃣",
+        "a": [
+          "1983 World Cup"
+        ],
+        "d": 2,
+        "h": "Kapil's Devils beat the West Indies at Lord's."
+      },
+      {
+        "e": "🏏🔴✨",
+        "a": [
+          "Reverse Swing"
+        ],
+        "d": 3,
+        "h": "An old ball moving the wrong way. Pakistan's gift to fast bowling."
+      },
+      {
+        "e": "🧤⚡🏏",
+        "a": [
+          "Stumped"
+        ],
+        "d": 3,
+        "h": "You left your crease, the keeper didn't miss."
+      },
+      {
+        "e": "🏏🌙🎨",
+        "a": [
+          "Day Night Test",
+          "Pink Ball Test"
+        ],
+        "d": 3,
+        "h": "Test cricket under lights, with a pink ball."
+      }
+    ],
+    "nineties": [
+      {
+        "e": "⚡🦸‍♂️🇮🇳",
+        "a": [
+          "Shaktimaan"
+        ],
+        "d": 1,
+        "h": "Sunday mornings. The spinning transformation."
+      },
+      {
+        "e": "🍜2️⃣⏱️",
+        "a": [
+          "Maggi"
+        ],
+        "d": 1,
+        "h": "Two-minute noodles that always took five."
+      },
+      {
+        "e": "🐍📱🔢",
+        "a": [
+          "Snake",
+          "Nokia Snake"
+        ],
+        "d": 1,
+        "h": "The only game on the phone, and it was enough."
+      },
+      {
+        "e": "📱🔨🛡️",
+        "a": [
+          "Nokia 3310"
+        ],
+        "d": 1,
+        "h": "Reportedly survivable from any height."
+      },
+      {
+        "e": "📺🌈🎶",
+        "a": [
+          "Doordarshan",
+          "DD"
+        ],
+        "d": 2,
+        "h": "One channel, the whole country, and that colour-bars logo."
+      },
+      {
+        "e": "🎧📼🚶",
+        "a": [
+          "Walkman"
+        ],
+        "d": 2,
+        "h": "Cassette in your pocket, headphones on, batteries dying."
+      },
+      {
+        "e": "📼⏪🎬",
+        "a": [
+          "VCR",
+          "Video Cassette"
+        ],
+        "d": 2,
+        "h": "Be kind, rewind."
+      },
+      {
+        "e": "☎️🔢🏠",
+        "a": [
+          "Landline"
+        ],
+        "d": 2,
+        "h": "One phone, in the hallway, and everyone listening."
+      },
+      {
+        "e": "🎮🍄🔧",
+        "a": [
+          "Super Mario",
+          "Mario"
+        ],
+        "d": 2,
+        "h": "The plumber, the mushroom, the pipes."
+      },
+      {
+        "e": "💿🎵📀",
+        "a": [
+          "Compact Disc",
+          "CD"
+        ],
+        "d": 2,
+        "h": "Rainbow on the back, scratched within a week."
+      },
+      {
+        "e": "🖊️💧📓",
+        "a": [
+          "Fountain Pen",
+          "Ink Pen"
+        ],
+        "d": 2,
+        "h": "Leaked into your shirt pocket at least once."
+      },
+      {
+        "e": "📻🎶🌅",
+        "a": [
+          "Radio"
+        ],
+        "d": 2,
+        "h": "Before playlists, someone else picked the songs."
+      },
+      {
+        "e": "🥤🍋🇮🇳",
+        "a": [
+          "Limca"
+        ],
+        "d": 3,
+        "h": "Lime-flavoured, cloudy, and it had its own book of records."
+      },
+      {
+        "e": "🧊🥤🍊",
+        "a": [
+          "Rasna"
+        ],
+        "d": 3,
+        "h": "'I love you Rasna.' A powder that became a summer."
+      },
+      {
+        "e": "💾🖥️🐢",
+        "a": [
+          "Floppy Disk"
+        ],
+        "d": 3,
+        "h": "1.44 MB. The save icon outlived the object."
+      }
+    ],
+    "shows": [
+      {
+        "e": "👑🐉❄️",
+        "a": [
+          "Game of Thrones",
+          "GOT"
+        ],
+        "d": 1,
+        "h": "Winter came. The ending did not go well."
+      },
+      {
+        "e": "🔬🧪🚐",
+        "a": [
+          "Breaking Bad"
+        ],
+        "d": 1,
+        "h": "A chemistry teacher, a camper van, and a very bad decision."
+      },
+      {
+        "e": "🙃🔦👾",
+        "a": [
+          "Stranger Things"
+        ],
+        "d": 1,
+        "h": "Hawkins, the Upside Down, and Eleven."
+      },
+      {
+        "e": "☕6️⃣👫",
+        "a": [
+          "Friends"
+        ],
+        "d": 1,
+        "h": "A coffee shop, an orange couch, ten years."
+      },
+      {
+        "e": "💰🎭🇪🇸",
+        "a": [
+          "Money Heist",
+          "La Casa de Papel"
+        ],
+        "d": 1,
+        "h": "Red jumpsuits, Dalí masks, Bella Ciao."
+      },
+      {
+        "e": "🦑🔴🟢",
+        "a": [
+          "Squid Game"
+        ],
+        "d": 1,
+        "h": "Children's games, lethal stakes, a giant doll."
+      },
+      {
+        "e": "🏢📎🐻",
+        "a": [
+          "The Office"
+        ],
+        "d": 2,
+        "h": "Scranton, a paper company, and a documentary crew nobody explains."
+      },
+      {
+        "e": "🕵️‍♂️🇬🇧🎻",
+        "a": [
+          "Sherlock"
+        ],
+        "d": 2,
+        "h": "221B Baker Street, updated for mobile phones."
+      },
+      {
+        "e": "🧟‍♂️🏹🚶",
+        "a": [
+          "The Walking Dead"
+        ],
+        "d": 2,
+        "h": "A crossbow, a sheriff, and a great many walkers."
+      },
+      {
+        "e": "👑🇬🇧📜",
+        "a": [
+          "The Crown"
+        ],
+        "d": 2,
+        "h": "Elizabeth II, decade by decade."
+      },
+      {
+        "e": "🔫🇮🇳🪑",
+        "a": [
+          "Mirzapur"
+        ],
+        "d": 2,
+        "h": "Kaleen Bhaiya, the gaddi, and Purvanchal."
+      },
+      {
+        "e": "🕵️🇮🇳👨‍👩‍👧",
+        "a": [
+          "The Family Man"
+        ],
+        "d": 2,
+        "h": "A middle-class dad who is also a secret agent."
+      },
+      {
+        "e": "🌾🏢🇮🇳",
+        "a": [
+          "Panchayat"
+        ],
+        "d": 3,
+        "h": "An engineering graduate stuck as a village secretary in Phulera."
+      },
+      {
+        "e": "🚬🕉️🔫",
+        "a": [
+          "Sacred Games"
+        ],
+        "d": 3,
+        "h": "Ganesh Gaitonde, Sartaj Singh, and 25 days."
+      }
+    ],
+    "festivals": [
+      {
+        "e": "🪔✨🎆",
+        "a": [
+          "Diwali",
+          "Deepavali"
+        ],
+        "d": 1,
+        "h": "Festival of lights. Lamps, sweets, and far too many crackers."
+      },
+      {
+        "e": "🎨💦🌈",
+        "a": [
+          "Holi"
+        ],
+        "d": 1,
+        "h": "Colours, water, and no white clothes survive."
+      },
+      {
+        "e": "🌙🕌🤲",
+        "a": [
+          "Eid"
+        ],
+        "d": 1,
+        "h": "The crescent is sighted and the fasting ends."
+      },
+      {
+        "e": "🎄🎅⭐",
+        "a": [
+          "Christmas"
+        ],
+        "d": 1,
+        "h": "Tree, star, and a man in red."
+      },
+      {
+        "e": "🧵👦👧",
+        "a": [
+          "Raksha Bandhan",
+          "Rakhi"
+        ],
+        "d": 1,
+        "h": "A thread tied on the wrist, a promise, and cash."
+      },
+      {
+        "e": "🐘🌺🌊",
+        "a": [
+          "Ganesh Chaturthi",
+          "Ganpati"
+        ],
+        "d": 2,
+        "h": "Ten days of Ganpati, then immersion in the sea."
+      },
+      {
+        "e": "🪁☀️🌾",
+        "a": [
+          "Makar Sankranti",
+          "Uttarayan"
+        ],
+        "d": 2,
+        "h": "Kites fill the sky and the sun turns north."
+      },
+      {
+        "e": "💃🥢9️⃣",
+        "a": [
+          "Navratri"
+        ],
+        "d": 2,
+        "h": "Nine nights of garba and dandiya."
+      },
+      {
+        "e": "🏹🔥👹",
+        "a": [
+          "Dussehra",
+          "Vijayadashami"
+        ],
+        "d": 2,
+        "h": "Ravana burns. Good beats evil, loudly."
+      },
+      {
+        "e": "🌾🥁🇮🇳",
+        "a": [
+          "Baisakhi",
+          "Vaisakhi"
+        ],
+        "d": 3,
+        "h": "Punjab's harvest festival, and the founding of the Khalsa."
+      },
+      {
+        "e": "🌕🥛🍯",
+        "a": [
+          "Pongal"
+        ],
+        "d": 3,
+        "h": "Tamil harvest festival. Rice boils over — that's the point."
+      },
+      {
+        "e": "🚣🌴🍛",
+        "a": [
+          "Onam"
+        ],
+        "d": 3,
+        "h": "Kerala. Snake boats and a sadya served on a banana leaf."
+      },
+      {
+        "e": "🔥🌾🥜",
+        "a": [
+          "Lohri"
+        ],
+        "d": 3,
+        "h": "A bonfire, popcorn and peanuts thrown in, in the Punjabi winter."
+      }
+    ],
+    "songs": [
+      {
+        "e": "🫵❤️🎵",
+        "a": [
+          "Tum Hi Ho"
+        ],
+        "d": 2,
+        "h": "Aashiqui 2. Read the emoji literally: 'you only are'."
+      },
+      {
+        "e": "🚂💃🎶",
+        "a": [
+          "Chaiyya Chaiyya"
+        ],
+        "d": 2,
+        "h": "Dil Se. Shah Rukh dancing on the roof of a moving train."
+      },
+      {
+        "e": "✊🎵🇮🇳",
+        "a": [
+          "Jai Ho"
+        ],
+        "d": 2,
+        "h": "Slumdog Millionaire. It won an Oscar."
+      },
+      {
+        "e": "🌧️💦💃",
+        "a": [
+          "Tip Tip Barsa Paani"
+        ],
+        "d": 2,
+        "h": "Mohra. A yellow saree in the rain."
+      },
+      {
+        "e": "🎨💦🔫",
+        "a": [
+          "Balam Pichkari"
+        ],
+        "d": 3,
+        "h": "Yeh Jawaani Hai Deewani. A Holi song — pichkari is the water gun."
+      },
+      {
+        "e": "💔🌾🎶",
+        "a": [
+          "Channa Mereya"
+        ],
+        "d": 3,
+        "h": "Ae Dil Hai Mushkil. Arijit at his most devastating."
+      },
+      {
+        "e": "🌿✋👰",
+        "a": [
+          "Mehndi Laga Ke Rakhna"
+        ],
+        "d": 3,
+        "h": "DDLJ. The pre-wedding song everyone still plays."
+      },
+      {
+        "e": "👸💃🔥",
+        "a": [
+          "Deewani Mastani"
+        ],
+        "d": 3,
+        "h": "Bajirao Mastani. The mirrored palace."
+      },
+      {
+        "e": "🌙⭐❤️",
+        "a": [
+          "Chand Sifarish"
+        ],
+        "d": 3,
+        "h": "Fanaa. The moon puts in a good word for him."
+      },
+      {
+        "e": "💛🌼🎓",
+        "a": [
+          "Give Me Some Sunshine"
+        ],
+        "d": 3,
+        "h": "3 Idiots. Sung on a hostel roof."
+      }
+    ]
+  }
+}

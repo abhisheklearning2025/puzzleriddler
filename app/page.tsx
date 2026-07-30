@@ -1,65 +1,51 @@
-import Image from "next/image";
+import { getGames } from "@/lib/data/games";
+import { GameCard } from "@/components/home/GameCard";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
-export default function Home() {
+export default async function Home() {
+  const games = await getGames();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="container">
+      <header className="site-header">
+        <a className="brand" href="/">
+          <span className="mark">🧩</span>
+          <span className="name">
+            Puzzle<em>Riddler</em>
+          </span>
+        </a>
+        <ThemeSwitcher />
+      </header>
+
+      <section className="card hero">
+        <p className="kicker">party puzzles for a room</p>
+        <h1 className="display">
+          Read the puzzle.
+          <br />
+          Shout the answer.
+        </h1>
+        <p className="lede">
+          Put it on the big screen, split into teams, and let people yell it out. No slides to build,
+          no scores to track on a whiteboard.
+        </p>
+        <div className="hero-demo">
+          <span className="e emoji">🪙 🔫 🐴</span>
+          <span className="arrow">→</span>
+          <span className="ans">Sholay</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <p className="section-label">Pick a game</p>
+      <div className="games-grid">
+        {games.map((g) => (
+          <GameCard key={g.slug} game={g} />
+        ))}
+      </div>
+
+      <footer className="site-foot">
+        Three looks to choose from — try the switcher up top. More games, your own puzzle packs, and
+        an admin studio are on the way.
+      </footer>
+    </main>
   );
 }
